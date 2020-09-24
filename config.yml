@@ -45,7 +45,7 @@ mediaTypes:
 module:
   mounts:
     - source: dist
-      target: static/docs/v0.1.1-alpha1-rc-alpha1/docs
+      target: static/docs/v0.1.1-alpha2-rc-alpha1/docs
     - source: site/assets
       target: assets
     - source: site/content
@@ -56,18 +56,18 @@ module:
       target: layouts
     - source: site/static
       target: static
-    - source: site/static/docs/v0.1.1-alpha1-rc-alpha1/assets/favicons/apple-touch-icon.png
+    - source: site/static/docs/v0.1.1-alpha2-rc-alpha1/assets/favicons/apple-touch-icon.png
       target: static/apple-touch-icon.png
-    - source: site/static/docs/v0.1.1-alpha1-rc-alpha1/assets/img/favicons/favicon.ico
+    - source: site/static/docs/v0.1.1-alpha2-rc-alpha1/assets/img/favicons/favicon.ico
       target: static/favicon.ico
 
 # Params
   description: The most popular front-end framework for Stylus
   authors: Jeremy Bolding & ChiChi contributers
-  social_image: /docs/v0.1.1-alpha1-rc-alpha1/assets/brand/chichi-social.png
-  social_logo: /docs/v0.1.1-alpha1-rc-alpha1/assets/brand/chichi-social-logo.png
+  social_image: /docs/v0.1.1-alpha2-rc-alpha1/assets/brand/chichi-social.png
+  social_logo: /docs/v0.1.1-alpha2-rc-alpha1/assets/brand/chichi-social-logo.png
 
-  current_version: 0.1.1-alpha1-rc-alpha1
+  current_version: 0.1.1-alpha2-rc-alpha1
   github_org: https://github.com/chichi
   repo: https://github.com/chichi/chichi
   twitter: chichi-framework
@@ -76,9 +76,9 @@ module:
   blog: https://blog.chichi.io
 
   download:
-    source: https://github.com/chichi-framework/chichi/archive/v0.1.1-alpha1-rc-alpha1.zip
-    dist: http://github.com/chichi-framework/chichi/releases/download/v0.1.1-alpha1-rc-alpha1/chichi-0.1.1-alpha1-rc-alpha1-dist.zip
+    source: https://github.com/chichi-framework/chichi/archive/v0.1.1-alpha2-rc-alpha1.zip
+    dist: http://github.com/chichi-framework/chichi/releases/download/v0.1.1-alpha2-rc-alpha1/chichi-0.1.1-alpha2-rc-alpha1-dist.zip
 
   cdn:
-    css: https://cdn.jsdeliver.net/npm/chichi@0.1.1-alpha1-rc-alpha1/dist/css/chichi.min.css
-    js: https://cdn.jsdeliver.net/npm/chichi@0.1.1-alpha1-rc-alpha1/dist/js/chichi.min.js
+    css: https://cdn.jsdeliver.net/npm/chichi@0.1.1-alpha2-rc-alpha1/dist/css/chichi.min.css
+    js: https://cdn.jsdeliver.net/npm/chichi@0.1.1-alpha2-rc-alpha1/dist/js/chichi.min.js
