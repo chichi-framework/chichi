@@ -1,8 +1,8 @@
 {
   "name": "chichi",
   "description": "The most popular front-end framework for Stylus",
-  "version": "0.1.0-alpha1",
-  "version_short": "0.1.0",
+  "version": "0.1.0-alpha2-alpha1",
+  "version_short": "0.1.0-alpha2",
   "keywords": [
     "css",
     "stylus",
@@ -23,10 +23,14 @@
     "lint:typescript": "",
     "lint:stylus": "stylelint \"**/*.styl\" --cache --cache-location .cache/.stylelintcache",
     "lint": "npm-run-all --parallel lint:*",
-    "build:stylus": "",
-    "build:typescript": "",
+    "build:stylus": "parcel build stylus/chichi.styl --no-minify --out-dir ./dist/css",
+    "build:stylus:minified": "parcel build stylus/chichi.styl --out-dir ./dist/css",
+    "build:typescript": "parcel build ts/chichi.ts --no-minify --out-dir ./dist/js",
+    "build:typescript:minified": "parcel build ts/chichi.ts --out-dir ./dist/js",
     "build:docs": "hugo --cleanDestinationDir",
     "build": "npm-run-all --parallel build:*",
+    "release": "",
+    "release:zip": "cross-env-shell \"rm -rf chichi-$npm_package_version-dist;cp -r dist/ chichi-$npm_package_version-dist;zip -r9 chichi-$npm_package_version-dist.zip chichi-$npm_package_version-dist;rm -rf chichi-$npm_package_version-dist\"",
     "serve:docs": "hugo server --port 4200 --disableFastRender",
     "serve:docs:only": "sirv _gh_pages --port 4200",
     "watch:stylus": "parcel watch stylus/**/*.styl",
@@ -34,7 +38,6 @@
     "watch:docs:ts": "parcel watch docs/assets/ts/**/*.ts",
     "watch:docs:stylus": "parcel watch docs/assets/stylus/**/*.styl",
     "watch": "npm-run-all --parallel watch:*",
-    "test:stylus": "",
     "test:typescript": "",
     "test": "npm-run-all --parallel test:*"
   },
@@ -46,10 +49,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/chichi/chichi.git"
+    "url": "https://github.com/chichi-framework/chichi.git"
   },
   "bugs": {
-    "url": "https://github.com/chichi/chichi/master/issues/new"
+    "url": "https://github.com/chichi-framework/chichi/master/issues/new"
   },
   "license": "MIT",
   "files": [

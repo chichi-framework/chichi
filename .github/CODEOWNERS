@@ -1,5 +1,5 @@
 
-*.js    @chichi/chichi
-*.ts    @chichi/chichi
-*.css   @chichi/chichi
-*.styl  @chichi/chichi
+*.js    @chichi-framework/chichi
+*.ts    @chichi-framework/chichi
+*.css   @chichi-framework/chichi
+*.styl  @chichi-framework/chichi

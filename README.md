@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://chichi.io/">
-    <img src="https://chichi.io/assets/brand/chichi-logo.png" alt="Bootstrap logo" width="200" height="165">
+    <img src="https://chichi.io/assets/brand/chichi-logo.png" alt="ChiChi logo" width="200" height="165">
   </a>
 </p>
 
@@ -12,9 +12,9 @@
   <a href="https://chichi.io/docs/"><strong>Explore ChiChi docs »</strong></a>
   <br>
   <br>
-  <a href="https://github.com/chichi/chichi/issues/new?template=bug_report.md">Report bug</a>
+  <a href="https://github.com/chichi-framework/chichi/issues/new?template=bug_report.md">Report bug</a>
   ·
-  <a href="https://github.com/chichi/chichi/issues/new?template=feature_request.md">Request feature</a>
+  <a href="https://github.com/chichi-framework/chichi/issues/new?template=feature_request.md">Request feature</a>
   ·
   <a href="https://blog.chichi.io/">Blog</a>
 </p>
@@ -33,8 +33,8 @@
 
 ## Quick Start
 
-- [Download the latest release.](https://github.com/chichi/chichi/archive/v0.1.0.zip)
-- Clone the repo: `git clone https://github.com/chichi/chichi.git`
+- [Download the latest release.](https://github.com/chichi-framework/chichi/archive/v0.1.0.zip)
+- Clone the repo: `git clone https://github.com/chichi-framework/chichi.git`
 - Install with [npm](https://www.npmjs.com/): `npm install chichi@0.1.0`
 - Install with [yarn](https://yarnpkg.com/): `yarn add chichi@0.1.0`
 - Install with [Composer](https://getcomposer.org/): `composer require chichi/chichi:0.1.0`
@@ -47,11 +47,11 @@ Read the [Getting started page](https://chichi.io/docs/0.1.0/getting-started/int
 [![Slack](https://chichi-slack.slack.io/badge.svg)](https://chichi-slack.slack.io/)
 [![Build Status]()]()
 [![npm version](https://img.shields.io/npm/v/chichi.svg)](https://www.npmjs.com/package/chichi)
-[![Meteor Atmosphere](https://img.shields.io/badge/meteor-chichi-blue.svg)](https://atmospherejs.com/chichi/chichi)
+[![Meteor Atmosphere](https://img.shields.io/badge/meteor-chichi-blue.svg)](https://atmospherejs.com/chichi-framework/chichi)
 [![Packagist Prerelease](https://img.shields.io/packagist/vpre/chichi/chichi.svg)](https://packagist.org/packages/chichi/chichi)
 [![NuGet](https://img.shields.io/nuget/vpre/chichi.svg)](https://www.nuget.org/packages/chichi/absoluteLatest)
-[![CSS gzip size](https://img.badgesize.io/chichi/chichi/master/dist/css/chichi.min.css?compression=gzip&label=CSS+gzip+size)](https://github.com/chichi/chichi/tree/master/dist/css/chichi.min.css)
-[![JS gzip size](https://img.badgesize.io/chichi/chichi/master/dist/js/chichi.min.js?compression=gzip&label=JS+gzip+size)](https://github.com/chichi/chichi/tree/master/dist/js/chichi.min.js)
+[![CSS gzip size](https://img.badgesize.io/chichi/chichi/master/dist/css/chichi.min.css?compression=gzip&label=CSS+gzip+size)](https://github.com/chichi-framework/chichi/tree/master/dist/css/chichi.min.css)
+[![JS gzip size](https://img.badgesize.io/chichi/chichi/master/dist/js/chichi.min.js?compression=gzip&label=JS+gzip+size)](https://github.com/chichi-framework/chichi/tree/master/dist/js/chichi.min.js)
 [![Backers on Open Collective](https://img.shields.io/opencollective/backers/chichi.svg)](#backers)
 [![Sponsors on Open Collective](https://img.shields.io/opencollective/sponsors/chichi.svg)](#sponsors)
 
@@ -76,7 +76,7 @@ chichi/
 
 ## Bugs and feature requests
 
-Have a bug or a feature request? Please first read the [issue guidelines](https://github.com/chichi/chichi/blob/master/.github/CONTRIBUTING.md#using-the-issue-tracker) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/chichi/chichi/issues/new).
+Have a bug or a feature request? Please first read the [issue guidelines](https://github.com/chichi-framework/chichi/blob/master/.github/CONTRIBUTING.md#using-the-issue-tracker) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/chichi-framework/chichi/issues/new).
 
 ## Documentation
 
@@ -101,17 +101,17 @@ You can find all our previous releases docs on <https://chichi.io/docs/versions/
 
 ## Contributing
 
-Please read through our [contributing guidelines](https://github.com/chichi/chichi/blob/master/.github/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
+Please read through our [contributing guidelines](https://github.com/chichi-framework/chichi/blob/master/.github/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
 
-Moreover, if your pull request contains JavaScript patches or features, you must include [relevant unit tests](https://github.com/chichi/chichi/tree/master/js/tests). All HTML and CSS should conform to the [Code Guide](https://github.com/chichi/code-guide), maintained by [Jeremy Bolding](https://github.com/thecodechef).
+Moreover, if your pull request contains JavaScript patches or features, you must include [relevant unit tests](https://github.com/chichi-framework/chichi/tree/master/js/tests). All HTML and CSS should conform to the [Code Guide](https://github.com/chichi-framework/code-guide), maintained by [Jeremy Bolding](https://github.com/thecodechef).
 
-Editor preferences are available in the [editor config](https://github.com/chichi/chichi/blob/master/.editorconfig) for easy use in common text editors. Read more and download plugins at <https://editorconfig.org/>.
+Editor preferences are available in the [editor config](https://github.com/chichi-framework/chichi/blob/master/.editorconfig) for easy use in common text editors. Read more and download plugins at <https://editorconfig.org/>.
 
 ## Community
 
 Get updates on Bootstrap's development and chat with the project maintainers and community members.
 
-- Follow [@chichi-framework on Twitter](https://twitter.com/chichi-framework).
+- Follow [@chichi-framework on Twitter](https://twitter.com/chichiframework).
 - Read and subscribe to [The Official ChiChi Blog](https://blog.chichi.io/).
 - Join [the official Slack room](https://chichi-slack.slack.io/).
 - Chat with fellow Members in IRC. On the `irc.freenode.net` server, in the `##chichi` channel.
@@ -122,7 +122,7 @@ Get updates on Bootstrap's development and chat with the project maintainers and
 
 For transparency into our release cycle and in striving to maintain backward compatibility, Bootstrap is maintained under [the Semantic Versioning guidelines](https://semver.org/). Sometimes we screw up, but we adhere to those rules whenever possible.
 
-See [the Releases section of our GitHub project](https://github.com/twbs/bootstrap/releases) for changelogs for each release version of ChiChi. Release announcement posts on [the official ChiChi blog](https://blog.chichi.io/) contain summaries of the most noteworthy changes made in each release.
+See [the Releases section of our GitHub project](https://github.com/chichi-framework/chichi/releases) for changelogs for each release version of ChiChi. Release announcement posts on [the official ChiChi blog](https://blog.chichi.io/) contain summaries of the most noteworthy changes made in each release.
 
 ## Creators
 
@@ -133,25 +133,25 @@ See [the Releases section of our GitHub project](https://github.com/twbs/bootstr
 
 ## Backers
 
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/chichi#backer)]
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/chichiframework#backer)]
 
-[![Backers](https://opencollective.com/chichi/backers.svg?width=890)](https://opencollective.com/chichi#backers)
+[![Backers](https://opencollective.com/chichi-framework/backers.svg?width=890)](https://opencollective.com/chichiframework#backers)
 
 ## Sponsors
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/chichi#sponsor)]
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/chichiframework#sponsor)]
 
-[![OC sponsor 0](https://opencollective.com/chichi/sponsor/0/avatar.svg)](https://opencollective.com/chichi/sponsor/0/website)
-[![OC sponsor 1](https://opencollective.com/chichi/sponsor/1/avatar.svg)](https://opencollective.com/chichi/sponsor/1/website)
-[![OC sponsor 2](https://opencollective.com/chichi/sponsor/2/avatar.svg)](https://opencollective.com/chichi/sponsor/2/website)
-[![OC sponsor 3](https://opencollective.com/chichi/sponsor/3/avatar.svg)](https://opencollective.com/chichi/sponsor/3/website)
-[![OC sponsor 4](https://opencollective.com/chichi/sponsor/4/avatar.svg)](https://opencollective.com/chichi/sponsor/4/website)
-[![OC sponsor 5](https://opencollective.com/chichi/sponsor/5/avatar.svg)](https://opencollective.com/chichi/sponsor/5/website)
-[![OC sponsor 6](https://opencollective.com/chichi/sponsor/6/avatar.svg)](https://opencollective.com/chichi/sponsor/6/website)
-[![OC sponsor 7](https://opencollective.com/chichi/sponsor/7/avatar.svg)](https://opencollective.com/chichi/sponsor/7/website)
-[![OC sponsor 8](https://opencollective.com/chichi/sponsor/8/avatar.svg)](https://opencollective.com/chichi/sponsor/8/website)
-[![OC sponsor 9](https://opencollective.com/chichi/sponsor/9/avatar.svg)](https://opencollective.com/chichi/sponsor/9/website)
+[![OC sponsor 0](https://opencollective.com/chichiframework/sponsor/0/avatar.svg)](https://opencollective.com/chichiframework/sponsor/0/website)
+[![OC sponsor 1](https://opencollective.com/chichiframework/sponsor/1/avatar.svg)](https://opencollective.com/chichiframework/sponsor/1/website)
+[![OC sponsor 2](https://opencollective.com/chichiframework/sponsor/2/avatar.svg)](https://opencollective.com/chichiframework/sponsor/2/website)
+[![OC sponsor 3](https://opencollective.com/chichiframework/sponsor/3/avatar.svg)](https://opencollective.com/chichiframework/sponsor/3/website)
+[![OC sponsor 4](https://opencollective.com/chichiframework/sponsor/4/avatar.svg)](https://opencollective.com/chichiframework/sponsor/4/website)
+[![OC sponsor 5](https://opencollective.com/chichiframework/sponsor/5/avatar.svg)](https://opencollective.com/chichiframework/sponsor/5/website)
+[![OC sponsor 6](https://opencollective.com/chichiframework/sponsor/6/avatar.svg)](https://opencollective.com/chichiframework/sponsor/6/website)
+[![OC sponsor 7](https://opencollective.com/chichiframework/sponsor/7/avatar.svg)](https://opencollective.com/chichiframework/sponsor/7/website)
+[![OC sponsor 8](https://opencollective.com/chichiframework/sponsor/8/avatar.svg)](https://opencollective.com/chichiframework/sponsor/8/website)
+[![OC sponsor 9](https://opencollective.com/chichiframework/sponsor/9/avatar.svg)](https://opencollective.com/chichiframework/sponsor/9/website)
 
 ## Copyright and license
 
-Code and documentation copyright 2020 the [ChiChi Authors.](https://github.com/chichi/chichi/graphs/contributors) Code released under the [MIT License](https://github.com/chichi/chichi/blob/master/LICENSE). Docs released under [Creative Commons](https://creativecommons.org/licenses/by/3.0/).
+Code and documentation copyright 2020 the [ChiChi Authors.](https://github.com/chichi-framework/chichi/graphs/contributors) Code released under the [MIT License](https://github.com/chichi-framework/chichi/blob/master/LICENSE). Docs released under [Creative Commons](https://creativecommons.org/licenses/by/3.0/).
