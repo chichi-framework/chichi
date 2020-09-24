@@ -1,0 +1,29 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): elements/container.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.container
+  flex-grow: 1
+  margin: 0 auto
+  position: relative
+  width: auto
+  &.is-fluid
+    max-width: none
+    padding-left: $gap
+    padding-right: $gap
+    width: 100%
+  +desktop()
+    max-width: $desktop - $container_offset
+  +until_widescreen()
+    &.is-widescreen
+      max-width: $widescreen - $container_offset
+  +until_fullhd()
+    &.is-fullhd
+      max-width: $fullhd - $container_offset
+  +widescreen()
+    max-width: $widescreen - $container_offset
+  +fullhd()
+    max-width: $fullhd - $container_offset

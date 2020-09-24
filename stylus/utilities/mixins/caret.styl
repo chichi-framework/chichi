@@ -1,0 +1,57 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): utilities/mixins/caret.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+caret-down()
+  border-bottom: 0
+  border-left: $caret-width solid transparent
+  border-right: $caret-width solid transparent
+  border-top: $caret-width solid
+
+caret-up()
+  border-bottom: $caret-width solid
+  border-left: $caret-width solid transparent
+  border-right: $caret-width solid transparent
+  border-top: 0
+
+caret-right()
+  border-bottom: $caret-width solid transparent
+  border-left: $caret-width solid
+  border-right: 0
+  border-top: $caret-width solid transparent
+
+caret-left()
+  border-bottom: $caret-width solid transparent
+  border-right: $caret-width solid
+  border-top: $caret-width solid transparent
+
+caret($direction = 'down')
+  if $enable-caret
+    &::after
+      display: inline-block
+      margin-left: $caret-spacing
+      vertical-align: $caret-vertical-align
+      content: ''
+      if $direction is 'down'
+        caret-down()
+      else if $direction is 'up'
+        caret-up()
+      else if $direction is 'right'
+        caret-right()
+
+    if $direction is 'left'
+      &::after
+        display: none
+
+      &::before
+        display: inline-block
+        margin-right: $caret-spacing
+        vertical-align: $caret-vertical-align
+        content: ''
+        caret-left()
+
+    &:empty::after
+      margin-left: 0

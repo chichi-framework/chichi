@@ -1,0 +1,288 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): elements/button.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.button
+  @extends $control
+  @extends $unselectable
+  background-color: $button_background_color
+  border-color: $button_border_color
+  border-width: $button_border_width
+  color: $button_color
+  cursor: pointer
+  if $button_family
+    font-family: $button_family
+  justify-content: center
+  padding-bottom: $button_padding_vertical
+  padding-left: $button_padding_horizontal
+  padding-right: $button_padding_horizontal
+  padding-top: $button_padding_vertical
+  text-align: center
+  white-space: nowrap
+  strong
+    color: inherit
+  .icon
+    &,
+    &.is-small,
+    &.is-medium,
+    &.is-large
+      height: 1.5em
+      width: 1.5em
+    &:first-child:last-child
+      margin-left: 'calc(-1 / 2 * %s - %s)' % ($button_padding_horizontal, $button_border_width)
+      margin-right: 'calc(-1 / 2 * %s - %s)' % ($button_padding_horizontal, $button_border_width)
+  // States
+  &:hover,
+  &.is-hovered
+    border-color: $button_hover_border_color
+    color: $button_hover_color
+  &:focus,
+  &.is-focused
+    border-color: $button_focus-border_color
+    color: $button_focus_color
+    &:not(:active)
+      box-shadow: $button_focus_box_shadow_size $button_focus_box_shadow_color
+  &:active,
+  &.is-active
+    border-color: $button_active_border_color
+    color: $button_active_color
+  // Colors
+  &.is-text
+    background-color: transparent
+    border-color: transparent
+    color: $button_text_color
+    text-decoration: $button_text_decoration
+    &:hover,
+    &.is-hovered,
+    &:focus,
+    &.is-focused
+      background-color: $button_text_hover_background_color
+      color: $button_text_hover_color
+    &:active,
+    &.is-active
+      background-color: chichi_darken($button_text_hover_background_color, 5%)
+      color: $button_text_hover_color
+    &[disabled],
+    fieldset[disabled] &
+      background-color: transparent
+      border-color: transparent
+      box-shadow: 0
+  for $name, $pair in $button_colors
+    $color = nth($pair, 1)
+    $color_invert = nth($pair, 2)
+    &.is-{$name}
+      background-color: $color
+      border-color: transparent
+      color: $color_invert
+      &:hover,
+      &.is-hovered
+        background-color: bulmaDarken($color, 2.5%)
+        border-color: transparent
+        color: $color_invert
+      &:focus,
+      &.is-focused
+        border-color: transparent
+        color: $color_invert
+        &:not(:active)
+          box-shadow: $button_focus_box_shadow_size bulmaRgba($color, 0.25)
+      &:active,
+      &.is-active
+        background-color: bulmaDarken($color, 5%)
+        border-color: transparent
+        color: $color_invert
+      &[disabled],
+      fieldset[disabled] &
+        background-color: $color
+        border-color: transparent
+        box-shadow: 0
+      &.is-inverted
+        background-color: $color_invert
+        color: $color
+        &:hover,
+        &.is-hovered
+          background-color: chichi_darken($color_invert, 5%)
+        &[disabled],
+        fieldset[disabled] &
+          background-color: $color_invert
+          border-color: transparent
+          box-shadow: 0
+          color: $color
+      &.is-loading
+        &::after
+          border-color: transparent transparent $color_invert $color_invert !important
+      &.is-outlined
+        background-color: transparent
+        border-color: $color
+        color: $color
+        &:hover,
+        &.is-hovered,
+        &:focus,
+        &.is-focused
+          background-color: $color
+          border-color: $color
+          color: $color_invert
+        &.is-loading
+          &::after
+            border-color: transparent transparent $color $color !important
+          &:hover,
+          &.is-hovered,
+          &:focus,
+          &.is-focused
+            &::after
+              border-color: transparent transparent $color_invert $color_invert !important
+        &[disabled],
+        fieldset[disabled] &
+          background-color: transparent
+          border-color: $color
+          box-shadow: 0
+          color: $color
+      &.is-inverted.is-outlined
+        background-color: transparent
+        border-color: $color_invert
+        color: $color_invert
+        &:hover,
+        &.is-hovered,
+        &:focus,
+        &.is-focused
+          background-color: $color_invert
+          color: $color
+        &.is-loading
+          &:hover,
+          &.is-hovered,
+          &:focus,
+          &.is-focused
+            &::after
+              border-color: transparent transparent $color $color !important
+        &[disabled],
+        fieldset[disabled] &
+          background-color: transparent
+          border-color: $color_invert
+          box-shadow: 0
+          color: $color_invert
+      // If light and dark colors are provided
+      if (length($pair) >= 4)
+        $color_light: nth($pair, 3)
+        $color_dark: nth($pair, 4)
+        &.is-light
+          background-color: $color_light
+          color: $color_dark
+          &:hover,
+          &.is-hovered
+            background-color: chichi_darken($color_light, 2.5%)
+            border-color: transparent
+            color: $color_dark
+          &:active,
+          &.is-active
+            background-color: chichi_darken($color_light, 5%)
+            border-color: transparent
+            color: $color_dark
+  // Sizes
+  &.is-small
+    button_small()
+  &.is-normal
+    button_normal()
+  &.is-medium
+    button_medium()
+  &.is-large
+    button_large()
+
+  // Modifiers
+  &[disabled],
+  fieldset[disabled] &
+    background-color: $button_disabled_background_color
+    border-color: $button_disabled_border_color
+    box-shadow: $button_disabled_shadow
+    opacity: $button_disabled_opacity
+  &.is-fullwidth
+    display: flex
+    width: 100%
+  &.is-loading
+    color: transparent !important
+    pointer-events: 0
+    &::after
+      @extends $loader
+      center(1em)
+      position: absolute !important
+  &.is-static
+    background-color: $button_static_background_color
+    border-color: $button_static_border_color
+    color: $button_static_color
+    box-shadow: 0
+    pointer-events: 0
+  &.is-rounded
+    border-radius: $radius_rounded
+    padding-left: 'calc(%s + 0.25em)' % $button_padding_horizontal
+    padding-right: 'calc(%s + 0.25em)' % $button_padding_horizontal
+
+.buttons
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-start
+  .button
+    margin-bottom: 0.5rem
+    &:not(:last-child):not(.is-fullwidth)
+      if $enable_rtl
+        margin-left: .5rem
+      else
+        margin-right: .5rem
+  &:last-child
+    margin-bottom: -0.5rem
+  &:not(:last-child)
+    margin-bottom: 1rem
+  // Sizes
+  &.are-small
+    .button:not(.is-normal):not(.is-medium):not(.is-large)
+      button_small()
+  &.are-medium
+    .button:not(.is-small):not(.is-normal):not(.is-large)
+      button_medium()
+  &.are-large
+    .button:not(.is-small):not(.is-normal):not(.is-medium)
+      button_large()
+  &.has-addons
+    .button
+      &:not(:first-child)
+        border-bottom-left-radius: 0
+        border-top-left-radius: 0
+      &:not(:last-child)
+        border-bottom-right-radius: 0
+        border-top-right-radius: 0
+        if $enable_rtl
+          margin-left: -1px
+        else
+          margin-right: -1px
+      &:last-child
+        if $enable_rtl
+          margin-left: 0
+        else
+          margin-right: 0
+      &:hover,
+      &.is-hovered
+        z-index: 2 // @stylint ignore
+      &:focus,
+      &.is-focused,
+      &:active,
+      &.is-active,
+      &.is-selected
+        z-index: 3 // @stylint ignore
+        &:hover
+          z-index: 4 // @stylint ignore
+      &.is-expanded
+        flex-grow: 1
+        flex-shrink: 1
+  &.is-centered
+    justify-content: center
+    &:not(.has-addons)
+      .button:not(.is-fullwidth)
+        margin-left: 0.25rem
+        margin-right: 0.25rem
+  &.is-right
+    justify-content: flex-end
+    &:not(.has-addons)
+      .button:not(.is-fullwidth)
+        margin-left: 0.25rem
+        margin-right: 0.25rem

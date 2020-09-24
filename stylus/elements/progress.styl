@@ -1,0 +1,47 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): elements/progress.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.progress
+  @extends $block
+  appearance: none
+  border: 0
+  border-radius: $progress_border_radius
+  display: block
+  height: $size_normal
+  overflow: hidden
+  padding: 0
+  width: 100%
+
+  // Colors
+  for $name, $pair in $progress_colors
+    $color = nth($pair, 1)
+    &.is-{$name}
+      &::-webkit-progress-value,
+      &::-moz-progress-bar
+        background-color: $color
+      &:indeterminate
+        background-image: linear-gradient(to right, $color 30%, $progress_bar_background_color 30%)
+
+  // Animated
+  &:indeterminate
+    animation-duration: $progress_indeterminate_duration
+    animation-iteration-count: infinite
+    animation-name: moveIndeterminate
+    animation-timing-function: linear
+    background-color: $progress_bar_background_color
+    background-image linear-gradient(to right, $text 30%, $progress_bar_background_color 30%)
+    background-position: top left
+    background-repeat: no-repeat
+    background-size: 150% 150%
+    &::-webkit-progress-bar,
+    &::-moz-progress-bar
+      background-color: transparent
+
+  // Sizes
+  for $name in $progress_sizes
+    &.is-{$name}
+      height: lookup('$size_' + $name)

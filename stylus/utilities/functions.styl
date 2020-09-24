@@ -1,0 +1,45 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): utilitiess/functions.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+nth($list, $position)
+  return $list[$position - 1]
+
+find_color_invert($color)
+  if (luminosity($color) > .55)
+    return fade-out($black, .3)
+  else
+    return $white
+
+find_light_color($color)
+  return hsl(hue($color), saturation($color), 96%)
+
+find_dark_color($color)
+  return hsl(hue($color), saturation($color), 29%)
+
+chichi_rgba($color, $alpha)
+  if type-of($color) != 'color'
+    return $color
+  return rgba($color, $alpha)
+
+chichi_darken($color, $amount)
+  if type-of($color) != 'color'
+    return $color
+  return darken($color, $amount)
+
+chichi_lighten($color, $amount)
+  if type-of($color) != 'color'
+    return $color
+  return lighten($color, $amount)
+
+chichi_stylus_darken($color, $amount)
+  return lightness($color, lightness($color) - $amount)
+
+chichi_stylus_lighten($color, $amount)
+  return lightness($color, lightness($color) + $amount)
+
+chichi_stylus_saturate($color, $amount)
+  return saturation($color, saturation($color) + $amount)

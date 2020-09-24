@@ -1,0 +1,111 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): elements/table.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.table
+  @extends $block
+  background-color: $table_background_color
+  color: $table_color
+  td,
+  th
+    border: $table_cell_border
+    border-width: $table_cell_border_width
+    padding: $table_cell_padding
+    vertical-align: top
+    // Colors
+    for $name, $pair in $table_colors
+      $color = nth($pair, 1)
+      $color_invert = nth($pair, 2)
+      &.is-{$name}
+        background-color: $color
+        border-color: $color
+        color: $color_invert
+    // Modifiers
+    &.is-narrow
+      white-space: nowrap
+      width: 1%
+    &.is-selected
+      background-color: $table_row_active_background_color
+      color: $table_row_active_color
+      a,
+      strong
+        color: currentColor
+    &.is-vcentered
+      vertical-align: middle
+  th
+    color: $table_cell_heading_color
+    &:not([align])
+      text-align: inherit
+  tr
+    &.is-selected
+      background-color: $table_row_active_background_color
+      color: $table_row_active_color
+      a,
+      strong
+        color: currentColor
+      td,
+      th
+        border-color: $table_row_active_color
+        color: currentColor
+  thead
+    background-color: $table_head_background_color
+    td,
+    th
+      border-width: $table_head_cell_border_width
+      color: $table_head_cell_color
+  tfoot
+    background-color: $table_foot_background_color
+    td,
+    th
+      border-width: $table_foot_cell_border_width
+      color: $table_foot_cell_color
+  tbody
+    background-color: $table_body_background_color
+    tr
+      &:last-child
+        td,
+        th
+          border-bottom-width: 0
+  // Modifiers
+  &.is-bordered
+    td,
+    th
+      border-width: 1px
+    tr
+      &:last-child
+        td,
+        th
+          border-bottom-width: 1px
+  &.is-fullwidth
+    width: 100%
+  &.is-hoverable
+    tbody
+      tr:not(.is-selected)
+        &:hover
+          background-color: $table_row_hover_background_color
+    &.is-striped
+      tbody
+        tr:not(.is-selected)
+          &:hover
+            background-color: $table_row_hover_background_color
+            &:nth-child(even)
+              background-color: $table_striped_row_even_hover_background_color
+  &.is-narrow
+    td,
+    th
+      padding: 0.25em 0.5em
+  &.is-striped
+    tbody
+      tr:not(.is-selected)
+        &:nth-child(even)
+          background-color: $table_striped_row_even_background_color
+
+.table-container
+  @extends $block
+  overflow_touch()
+  overflow: auto
+  overflow-y: hidden
+  max-width: 100%

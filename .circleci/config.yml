@@ -1,0 +1,30 @@
+version: 2.1
+
+orbs:
+  # heroku: circleci/heroku@1.2.2
+  node: circleci/node@4.0.0
+  python: circleci/python@1.1.0
+  # slack: circleci/slack@3.4.2
+
+jobs:
+  install_python_deps:
+    executor: python/default
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pipenv
+
+  install_node_deps:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-path: ~/node_modules
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - install_python_deps
+      - install_node_deps

@@ -1,0 +1,105 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): grid/columns.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.column
+  display: block
+  flex-basis: 0
+  flex-grow: 1
+  flex-shrink: 1
+  padding: $column_gap
+
+  for $i in range(1,12)
+    .columns.is-mobile > &.is-{$i}
+      flex: none
+      width: percentage($i / 12)
+    .columns.is-mobile > &.is-offset-{$i}
+      margin-left: percentage($i / 12)
+
+.columns
+  margin-left:  '-%s' % $column_gap
+  margin-right: '-%s' % $column_gap
+  margin-top:   '-%s' % $column_gap
+  &:last-child
+    margin-bottom: '-%s' % $column_gap
+  &:not(:last-child)
+    margin-bottom: 'calc(1.5rem - %s)' % $column_gap
+  // Modifiers
+  &.is-centered
+    justify-content: center
+  &.is-gapless
+    margin-left: 0
+    margin-right: 0
+    margin-top: 0
+    & > .column
+      margin: 0
+      padding: 0 !important
+    &:not(:last-child)
+      margin-bottom: 1.5rem
+    &:last-child
+      margin-bottom: 0
+  &.is-mobile
+    display: flex
+  &.is-multiline
+    flex-wrap: wrap
+  &.is-vcentered
+    align-items: center
+  // Responsiveness
+  +tablet()
+    &:not(.is-desktop)
+      display: flex
+  +desktop()
+    // Modifiers
+    &.is-desktop
+      display: flex
+
+if $enable_variable_columns is defined
+  .columns.is-variable
+    --columnGap: 0.75rem
+    margin-left: calc(-1 * var(--columnGap))
+    margin-right: calc(-1 * var(--columnGap))
+    .column
+      padding-left: var(--columnGap)
+      padding-right: var(--columnGap)
+    for $i in range(0,8)
+      &.is-{$i}
+        --columnGap: $i * .25rem
+
+      +mobile()
+        &.is-{$i}-mobile
+          --columnGap: $i * .25rem
+
+      +tablet()
+        &.is-{$i}-tablet
+          --columnGap: $i * .25rem
+
+      +tablet_only()
+        &.is-{$i}-tablet-only
+          --columnGap: $i * .25rem
+
+      +touch()
+        &.is-{$i}-touch
+          --columnGap: $i * .25rem
+
+      +desktop()
+        &.is-{$i}-desktop
+          --columnGap: $i * .25rem
+
+      +desktop_only()
+        &.is-{$i}-desktop-only
+          --columnGap: $i * .25rem
+
+      +widescreen()
+        &.is-{$i}-widescreen
+          --columnGap: $i * .25rem
+
+      +widescreen_only()
+        &.is-{$i}-widescreen-only
+          --columnGap: $i * .25rem
+
+      +fullhd()
+        &.is-{$i}-fullhd
+          --columnGap: $i * .25rem

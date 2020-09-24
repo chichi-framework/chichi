@@ -1,0 +1,58 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): elements/title.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.title,
+.subtitle
+  @extends $block
+  word-break: break-word
+  em,
+  span
+    font-weight: inherit
+  sub
+    font-size: $title_sub_size
+  sup
+    font-size: $title_sup_size
+  .tag
+    vertical-align: middle
+
+.title
+  color: $title_color
+  if $title_family
+    font-family: $title_family
+  font-size: $title_size
+  font-weight: $title_weight
+  line-height: $title_line_height
+  strong
+    color: $title_strong_color
+    font-weight: $title_strong_weight
+  & + .highlight
+    margin-top: -0.75rem
+  &:not(.is-spaced) + .subtitle
+    margin-top: $subtitle-negative_margin
+  // Sizes
+  for $size in $sizes
+    $i: index($sizes, $size)
+    &.is-#{$i}
+      font-size: $size
+
+.subtitle
+  color: $subtitle_color
+  if $subtitle_family
+    font-family: $subtitle_family
+  font-size: $subtitle_size
+  font-weight: $subtitle_weight
+  line-height: $subtitle_line_height
+  strong
+    color: $subtitle_strong_color
+    font-weight: $subtitle_strong_weight
+  &:not(.is-spaced) + .title
+    margin-top: $subtitle_negative_margin
+  // Sizes
+  for $size in $sizes
+    $i = index($sizes, $size)
+    &.is-{$i}
+      font-size: $size

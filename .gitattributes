@@ -1,0 +1,8 @@
+# Enforce Unix newlines
+* text=auto eol=lf
+
+# Don't diff or textually merge source maps
+*.map binary
+
+chichi.css linguist-vendored=false
+chichi.js linguist-vendored=false

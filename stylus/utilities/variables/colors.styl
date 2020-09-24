@@ -1,0 +1,160 @@
+// Colors
+
+// Pallette
+$black              ?= hsl(0, 0%, 4%)
+$black_bis          ?= hsl(0, 0%, 7%)
+$black_ter          ?= hsl(0, 0%, 14%)
+$grey_darker        ?= hsl(0, 0%, 21%)
+$grey_dark          ?= hsl(0, 0%, 29%)
+$grey               ?= hsl(0, 0%, 48%)
+$grey_light         ?= hsl(0, 0%, 71%)
+$grey_lighter       ?= hsl(0, 0%, 86%)
+$grey_lightest      ?= hsl(0, 0%, 93%)
+$white_ter          ?= hsl(0, 0%, 96%)
+$white_bis          ?= hsl(0, 0%, 98%)
+$white              ?= hsl(0, 0%, 100%)
+$orange             ?= hsl(14,  100%, 53%)
+$yellow             ?= hsl(48,  100%, 67%)
+$green              ?= hsl(141, 53%,  53%)
+$turquoise          ?= hsl(171, 100%, 41%)
+$cyan               ?= hsl(204, 71%,  53%)
+$blue               ?= hsl(217, 71%,  53%)
+$purple             ?= hsl(271, 100%, 71%)
+$red                ?= hsl(348, 86%, 61%)
+
+// Main
+$primary            ?= $turquoise
+$secondary          ?= $purple
+$success            ?= $green
+$link               ?= $blue
+$info               ?= $cyan
+$warning            ?= $yellow
+$danger             ?= $red
+$light              ?= $white_ter
+$dark               ?= $grey_darker
+
+// Inverted Colors
+$orange_invert      ?= find_color_invert($orange)
+$yellow_invert      ?= find_color_invert($yellow)
+$green_invert       ?= find_color_invert($green)
+$turquoise_invert   ?= find_color_invert($turquoise)
+$cyan_invert        ?= find_color_invert($cyan)
+$blue_invert        ?= find_color_invert($blue)
+$purple_invert      ?= find_color_invert($purple)
+$red_invert         ?= find_color_invert($red)
+
+$primary_invert     ?= $turquoise_invert
+$secondary_invert   ?= $purple_invert
+$success_invert     ?= $green_invert
+$link_invert        ?= $blue_invert
+$info_invert        ?= $cyan_invert
+$warning_invert     ?= $yellow_invert
+$danger_invert      ?= $red_invert
+$light_invert       ?= find_color_invert($light)
+$dark_invert        ?= find_color_invert($dark)
+
+// Light Colors
+$orange_light       ?= find_light_color($orange)
+$yellow_light       ?= find_light_color($yellow)
+$green_light        ?= find_light_color($green)
+$turquoise_light    ?= find_light_color($turquoise)
+$cyan_light         ?= find_light_color($cyan)
+$blue_light         ?= find_light_color($blue)
+$purple_light       ?= find_light_color($purple)
+$red_light          ?= find_light_color($red)
+
+$primary_light      ?= $turquoise_light
+$secondary_light    ?= $purple_light
+$success_light      ?= $green_light
+$link_light         ?= $blue_light
+$info_light         ?= $cyan_light
+$warning_light      ?= $yellow_light
+$danger_light       ?= $red_light
+
+// Dark Colors
+$orange_dark        ?= find_dark_color($orange)
+$yellow_dark        ?= find_dark_color($yellow)
+$green_dark         ?= find_dark_color($green)
+$turquoise_dark     ?= find_dark_color($turquoise)
+$cyan_dark          ?= find_dark_color($cyan)
+$blue_dark          ?= find_dark_color($blue)
+$purple_dark        ?= find_dark_color($purple)
+$red_dark           ?= find_dark_color($red)
+
+$primary_dark       ?= $turquoise_dark
+$secondary_dark     ?= $purple_dark
+$success_dark       ?= $green_dark
+$link_dark          ?= $blue_dark
+$info_dark          ?= $cyan_dark
+$warning_dark       ?= $yellow_dark
+$danger_dark        ?= $red_dark
+
+// General
+$scheme_main        ?= $white
+$scheme_main_bis    ?= $white_bis
+$scheme_main_ter    ?= $white_ter
+$scheme_invert      ?= $black
+$scheme_invert_bis  ?= $black_bis
+$scheme_invert_ter  ?= $black_ter
+
+$background         ?= $white_ter
+
+$border             ?= $grey_lighter
+$border_hover       ?= $grey_light
+$border_light       ?= $grey_lightest
+$border_light_hover ?= $grey_light
+
+// Text
+$text               ?= $grey_dark
+$text_invert        ?= find_color_invert($text)
+$text_light         ?= $grey
+$text_strong        ?= $grey_darker
+
+// Code
+$code               ?= $red
+$code_background    ?= $background
+
+$pre                ?= $text
+$pre_background     ?= $background
+
+// Link
+$link_visited       ?= $orange
+$link_hover         ?= $grey_darker
+$link_hover_border  ?= $grey_light
+$link_focus         ?= $grey_darker
+$link_focus_border  ?= $blue
+$link_active        ?= $grey_darker
+$link_active_border ?= $grey_dark
+
+
+// Custom
+$custom_colors      ?= null
+$custom_shades      ?= null
+
+
+// Color Maps
+$colors             ?= merge({
+  'white': $white $black,
+  'black': $black $white,
+  'light': $light $light_invert,
+  'dark': $dark $dark_invert
+  'primary': $primary $primary_invert $primary_light $primary_dark,
+  'secondary': $secondary $secondary_invert $secondary_light $secondary_dark,
+  'success': $success $success_invert $success_light $success_dark,
+  'link': $link $link_invert $link_light $link_dark,
+  'info': $info $info_invert $info_light $info_dark,
+  'warning': $warning $warning_invert $warning_light $warning_dark,
+  'danger': $danger $danger_invert $danger_light $danger_dark
+  }, $custom_colors)
+
+$shades             ?= merge({
+  'black-bis': $black_bis
+  'black-ter': $black_ter
+  'grey-darker': $grey_darker
+  'grey-dark': $grey_dark
+  'grey': $grey
+  'grey-light': $grey_light
+  'grey-lighter': $grey_lighter
+  'white-ter': $white_ter
+  'white-bis': $white_bis
+  }, $custom_shades)

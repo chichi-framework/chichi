@@ -1,0 +1,48 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): components/alerts.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.alert
+  @extends $block
+  background-color: $alert_background_color
+  border-radius: $alert_radius
+  padding: $alert_padding
+  position: relative
+  a:not(.button):not(.dropdown-item)
+    color: currentColor
+    text-decoration: underline
+  strong
+    color: currentColor
+  code,
+  pre
+    background-color: $alert_code_background_color
+  pre
+    code
+      background-color: transparent
+  & > .delete
+    position: absolute
+    right: 0.5rem
+    top: @right
+  .title,
+  .subtitle,
+  .content
+    color: currentColor
+  for $name, $pair in $alert_colors
+    if length($pair) >= 4
+      $color = nth($pair, 1)
+      $color_invert = nth($pair, 2)
+      $color_light = nth($pair, 3)
+      $color_dark = nth($pair, 4)
+    else
+      $color = nth($pair, 1)
+      $color_invert = nth($pair, 2)
+    &.is-{$name}
+      background-color: $color
+      color: $color_invert
+      if $color_light is defined and $color_dark is defined
+        &.is-light
+          background-color: $color_light
+          color: $color_dark

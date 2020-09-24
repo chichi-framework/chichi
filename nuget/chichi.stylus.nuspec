@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>chichi</id>
+    <version>0.1.0-alpha1</version>
+    <title>ChiChi Stylus</title>
+    <description>The most popular front-end framework for Stylus</description>
+    <releaseNotes>https://blog.chichi.io</releaseNotes>
+    <summary>ChiChi CSS, Includes JavaScript</summary>
+    <language>en-us</language>
+    <projectUrl>https://chichi.io</projectUrl>
+    <icon>chichi-logo.png</icon>
+    <license type="file">LICENSE.txt</license>
+    <copyright>Copyright 2020</copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>css stylus mobile-first responsive front-end framework web</tags>
+    <contentFiles>
+      <files include="**/*" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="LICENSE.txt" target="" />
+    <file src="nuget/chichi-logo.png" target="" />
+
+    <file src="stylus\**\*.styl" target="content\Content\chichi" />
+    <file src="dist\js\chichi*.js" target="content\Scripts" />
+    <file src="dist\js\chichi*.js.map" target="content\Scripts" />
+
+    <file src="stylus\**\*.styl" target="contentFiles\any\any\webroot/stylus" />
+    <file src="dist\js\chichi*.js" target="contentFiles\any\any\webroot/js" />
+    <file src="dist\js\chichi*.js.map" target="contentFiles\any\any\webroot/js" />
+  </files>
+</package>

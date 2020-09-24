@@ -1,0 +1,117 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): base/generic.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+html
+  background-color: $body_background_color
+  font-size: $body_size
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+  min-width: $body_min_width
+  overflow-x: $body_overflow_x
+  overflow-y: $body_overflow_y
+  text-rendering: $body_rendering
+  text-size-adjust: 100%
+
+article,
+aside,
+figure,
+footer,
+header,
+hgroup,
+section
+  display: block
+
+body,
+button,
+input,
+optgroup,
+select,
+textarea
+  font-family: $body_family
+
+code,
+pre
+  -moz-osx-font-smoothing: auto
+  -webkit-font-smoothing: auto
+  font-family: $code_family
+
+body
+  color: $body_color
+  font-size: $body_font_size
+  font-weight: $body_weight
+  line-height: $body_line_height
+
+// Inline
+a
+  color: $link
+  cursor: pointer
+  text-decoration: none
+  strong
+    color: currentColor
+  &:hover
+    color: $link_hover
+
+code
+  background-color: $code_background
+  color: $code
+  font-size: $code_size
+  font-weight: $code_weight
+  padding: $code_padding
+
+hr
+  background-color: $hr_background_color
+  border: 0
+  display: block
+  height: $hr_height
+  margin: $hr_margin
+
+img
+  height: auto
+  max-width: 100%
+
+input[type='checkbox'],
+input[type='radio']
+  vertical-align: baseline
+
+small
+  font-size: $small_font_size
+
+span
+  font-style: inherit
+  font-weight: inherit
+
+strong
+  color: $strong_color
+  font-weight: $strong_weight
+
+// Block
+fieldset
+  border: 0
+
+pre
+  +overflow_touch
+  background-color: $pre_background
+  color: $pre
+  font-size: $pre_font_size
+  overflow-x: auto
+  padding: $pre_padding
+  white-space: pre
+  word-wrap: normal
+  code
+    background-color: transparent
+    color: currentColor
+    font-size: $pre_code_font_size
+    padding: 0
+
+table
+  td,
+  th
+    vertical-align: top
+    &:not([align])
+      text-align: inherit
+  th
+    color: $text_strong

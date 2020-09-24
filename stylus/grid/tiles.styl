@@ -1,0 +1,37 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): grid/tiles.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.tile
+  align-items: stretch
+  display: block
+  flex: $tile_flex
+  min-height: min-content
+  // Modifiers
+  &.is-ancestor
+    margin-left: $tile_spacing * -1
+    margin-right: $tile_spacing * -1
+    margin-top: $tile_spacing * -1
+    &:last-child
+      margin-bottom: $tile_spacing * -1
+    &:not(:last-child)
+      margin-bottom: $tile_spacing
+  &.is-child
+    margin: 0 !important
+  &.is-parent
+    padding: $tile_spacing
+  &.is-vertical
+    flex-direction: $tile_flex_direction
+    & > .tile.is-child:not(:last-child)
+      margin-bottom: 1.5rem !important
+  // Responsiveness
+  +tablet()
+    &:not(.is-child)
+      display: flex
+    for $i range(1, 12)
+      &.is-{$i}
+        flex: none
+        width: ($i / 12) * 100%

@@ -1,0 +1,22 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): elements/box.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.box
+  @extends $block
+  background-color: $box_background_color
+  border-radius: $box_radius
+  box-shadow: $box_shadow
+  color: $box_color
+  display: block
+  padding: $box_padding
+
+a.box
+  &:hover,
+  &:focus
+    box-shadow: $box_link_hover_shadow
+  &:active
+    box-shadow: $box_link_active_shadow

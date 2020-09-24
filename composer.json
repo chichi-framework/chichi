@@ -1,0 +1,28 @@
+{
+  "name": "chichi/chichi",
+  "description": "The most popular front-end framework for Stylus",
+  "keywords": [
+    "css",
+    "js",
+    "stylus",
+    "mobile-first",
+    "responsive",
+    "front-end",
+    "framework",
+    "web"
+  ],
+  "homepage": "https://chichi.io",
+  "authors": [
+    {
+      "name": "Jeremy Bolding",
+      "email": "cyberchefjay@gmail.com"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/chichi/chichi/issues"
+  },
+  "license": "MIT",
+  "replace": {
+    "chichi/chichi": "self.version"
+  }
+}

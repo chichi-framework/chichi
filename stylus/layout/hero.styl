@@ -1,0 +1,152 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): layout/hero.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.hero
+  align-items: stretch
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  .navbar
+    background: none
+  .tabs:
+    ul
+      border-bottom: none
+
+  // Colors
+  for $name, $pair in $hero_colors
+    if (length($pair) >= 4)
+      $color = nth($pair, 1)
+      $color_invert = nth($pair, 2)
+      $color_light = nth($pair, 3)
+      $color_dark = nth($pair, 4)
+    else
+      $color = nth($pair, 1)
+      $color_invert = nth($pair, 2)
+    &.is-{$name}
+      background-color: $color
+      color: $color_invert
+      a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
+      strong
+        color: inherit
+      .title
+        color: $color_invert
+      .subtitle
+        color: chichi_rgba($color_invert, 0.9)
+        a:not(.button),
+        strong
+          color: $color_invert
+      .navbar-menu
+        +touch()
+          background-color: $color
+      .navbar-item,
+      .navbar-link
+        color: chichi_rgba($color_invert, 0.7)
+      a.navbar-item,
+      .navbar-link
+        &:hover,
+        &.is-active
+          background-color: chichi_stylus_darken($color, 5%)
+          color: $color_invert
+      .tabs
+        a
+          color: $color_invert
+          opacity: 0.9
+          &:hover
+            opacity: 1
+        li
+          &.is-active a
+            opacity: 1
+        &.is-boxed,
+        &.is-toggle
+          a
+            color: $color_invert
+            &:hover
+              background-color: chichi_rgba($scheme_invert, 0.1)
+          li.is-active a
+            &,
+            &:hover
+              background-color: $color_invert
+              border-color: $color_invert
+              color: $color
+      // Modifiers
+      &.is-bold
+        $gradient_top_left = chichi_stylus_darken(chichi_stylus_saturate(spin($color, -10deg), 10%), 10%)
+        $gradient_bottom_right = chichi_stylus_lighten(chichi_stylus_saturate(spin($color, 10deg), 5%), 5%)
+        background-image: linear-gradient(141deg, $gradient_top_left 0%, $color 71%, $gradient_bottom_right 100%)
+        +mobile()
+          .navbar-menu
+            background-image: linear-gradient(141deg, $gradient_top_left 0%, $color 71%, $gradient_bottom_right 100%)
+  // Sizes
+  &.is-small
+    .hero-body
+      padding: $hero_body_padding_small
+  &.is-medium
+    +tablet()
+      .hero-body
+        padding: $hero_body_padding_medium
+  &.is-large
+    +tablet()
+      .hero-body
+        padding: $hero_body_padding_large
+  &.is-halfheight,
+  &.is-fullheight,
+  &.is-fullheight-with-navbar
+    .hero-body
+      align-items: center
+      display: flex
+      & > .container
+        flex-grow: 1
+        flex-shrink: 1
+  &.is-halfheight
+    min-height: 50vh
+  &.is-fullheight
+    min-height: 100vh
+
+// Components
+
+.hero-video
+  @extends $overlay
+  overflow: hidden
+  video
+    left: 50%
+    min-height: 100%
+    min-width: @min-height
+    position: absolute
+    top: @left
+    transform: translate3d(-50%, -50%, 0)
+  // Modifiers
+  &.is-transparent
+    opacity: 0.3
+  // Responsiveness
+  +mobile()
+    display: none
+
+.hero-buttons
+  margin-top: 1.5rem
+  // Responsiveness
+  +mobile()
+    .button
+      display: flex
+      &:not(:last-child)
+        margin-bottom: 0.75rem
+  +tablet()
+    display: flex
+    justify-content: center
+    .button:not(:last-child)
+      margin-right: @margin-top
+
+// Containers
+
+.hero-head,
+.hero-foot
+  flex-grow: 0
+  flex-shrink: 0
+
+.hero-body
+  flex-grow: 1
+  flex-shrink: 0
+  padding: $hero_body_padding

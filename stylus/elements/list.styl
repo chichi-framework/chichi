@@ -1,0 +1,33 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): elements/list.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.list
+  @extends $block
+  background-color: $list_background_color
+  border-radius: $list_border_radius
+  box-shadow: $list_box_shadow
+
+.list-item
+  display: block
+  padding: $list_item_padding
+  &:not(a)
+    color: $list_item_color
+  &:first-child
+    border-top-left-radius: $list_border_radius
+    border-top-right-radius: $list_border_radius
+  &:last-child
+    border-bottom-left-radius: $list_border_radius
+    border-bottom-right-radius: $list_border_radius
+  &:not(:last-child)
+    border-bottom: $list_item_border
+  &.is-active
+    background-color: $list_item_active_background_color
+    color: $list_item_active_color
+
+a.list-item
+  background-color: $list_item_hover_background_color
+  cursor: pointer

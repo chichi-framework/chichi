@@ -1,0 +1,56 @@
+//
+// --------------------------------------------------------------------------
+// ChiChi (v0.1.0-alpha1): components/callout.styl
+// Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+// --------------------------------------------------------------------------
+//
+
+.callout
+  @extends $block
+  background-color: $message_background_color
+  border-radius: $message_radius
+  font-size: $size_normal
+  strong
+    color: currentColor
+  a:not(.button):not(.tag):not(.dropdown-item)
+    color: currentColor
+    text-decoration: underline
+
+  // Sizes
+  &.is-small
+    font-size: $size_small
+  &.is-medium
+    font-size: $size_medium
+  &.is-large
+    font-size: $size_large
+
+  // Colors
+  for $name, $pair in $callout_colors
+    if length($pair) >= 4
+      $color = nth($pair, 1)
+      $color_invert = nth($pair, 2)
+      $color_light = nth($pair, 3)
+      $color_dark = nth($pair, 4)
+    else
+      $color = nth($pair, 1)
+      $color_invert = nth($pair, 2)
+    &.is-{$name}
+      if ($color_light is defined and ($color_dark is defined))
+        background-color: $color_light
+        &.callout-body
+          border-color: $color_light
+          color: $color_dark
+
+.callout-body
+  border-color: $callout_body_border_color
+  border-radius: $callout_body_radius
+  border-style: solid
+  border-width: $callout_body_border_width
+  color: $callout_body_color
+  padding: $callout_body_padding
+  code,
+  pre
+    background-color: $callout_body_pre_background_color
+  pre
+    code
+      background-color: $callout_body_pre_code_background_color
