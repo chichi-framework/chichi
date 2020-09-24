@@ -1,8 +1,8 @@
 {
   "name": "chichi",
   "description": "The most popular front-end framework for Stylus",
-  "version": "0.1.0-rc",
-  "version_short": "0.1.0",
+  "version": "0.1.1-alpha1-rc",
+  "version_short": "0.1.1-alpha1",
   "keywords": [
     "css",
     "stylus",
