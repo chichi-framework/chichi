@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## **unreleased**
+**v0.1.1-beta1**
 **v0.1.1-alpha3**
 **v0.1.1-alpha2**
 **v0.1.1-alpha1**

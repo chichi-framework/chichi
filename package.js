@@ -3,7 +3,7 @@
 Package.describe({
   name: 'chichi:chichi', // https://atmospherejs.com/chichi-framework/chichi
   summary: 'The most popular front-end framework for Stylus',
-  version: '0.1.1-alpha3-rc',
+  version: '0.1.1-beta1-rc',
   git: 'https://github.com/chichi-framework/chichi.git'
 });
 
