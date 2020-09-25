@@ -51,8 +51,8 @@ Read the [Getting started page](https://chichi.io/docs/0.1.0/getting-started/int
 [![Meteor Atmosphere](https://img.shields.io/badge/meteor-chichi-blue.svg)](https://atmospherejs.com/chichi-framework/chichi)
 [![Packagist Prerelease](https://img.shields.io/packagist/vpre/chichi/chichi.svg)](https://packagist.org/packages/chichi/chichi)
 [![NuGet](https://img.shields.io/nuget/vpre/chichi.svg)](https://www.nuget.org/packages/chichi/absoluteLatest)
-[![CSS gzip size](https://img.badgesize.io/chichi-framework/chichi/master/dist/css/chichi.min.css?compression=gzip&label=CSS+gzip+size)](https://github.com/chichi-framework/chichi/tree/master/dist/css/chichi.min.css)
-[![JS gzip size](https://img.badgesize.io/chichi-framework/chichi/master/dist/js/chichi.min.js?compression=gzip&label=JS+gzip+size)](https://github.com/chichi-framework/chichi/tree/master/dist/js/chichi.min.js)
+[![CSS Gzip Size](https://img.shields.io/github/size/chichi-framework/chichi/dist/css/chichi.min.css?label=gzip&logo=css&logoColor=white&style=for-the-badge)](https://github.com/chichi-framework/chichi/tree/master/dist/css/chichi.min.css)
+[![JS Gzip Size](https://img.shields.io/github/size/chichi-framework/chichi/dist/js/chichi.min.js?label=gzip&logo=javascript&logoColor=white&style=for-the-badge)](https://github.com/chichi-framework/chichi/tree/master/dist/js/chichi.min.js)
 
 ## What's Included
 
