@@ -45,15 +45,13 @@ Read the [Getting started page](https://chichi.io/docs/0.1.0/getting-started/int
 ## Status
 
 [![Slack](https://chichi-slack.slack.io/badge.svg)](https://chichi-slack.slack.io/)
-[![Build Status]()]()
+[![Build Status](https://img.shields.io/circleci/build/github/chichi-framework/chichi/master?label=CirleCi&logo=circleci&style=for-the-badge&token=59482c8a0c1e07a1a9ecd4c2454c3f0a161c68c7)](https://app.circleci.com/pipelines/github/chichi-framework/chichi)
 [![npm version](https://img.shields.io/npm/v/chichi.svg)](https://www.npmjs.com/package/chichi)
 [![Meteor Atmosphere](https://img.shields.io/badge/meteor-chichi-blue.svg)](https://atmospherejs.com/chichi-framework/chichi)
 [![Packagist Prerelease](https://img.shields.io/packagist/vpre/chichi/chichi.svg)](https://packagist.org/packages/chichi/chichi)
 [![NuGet](https://img.shields.io/nuget/vpre/chichi.svg)](https://www.nuget.org/packages/chichi/absoluteLatest)
 [![CSS gzip size](https://img.badgesize.io/chichi/chichi/master/dist/css/chichi.min.css?compression=gzip&label=CSS+gzip+size)](https://github.com/chichi-framework/chichi/tree/master/dist/css/chichi.min.css)
 [![JS gzip size](https://img.badgesize.io/chichi/chichi/master/dist/js/chichi.min.js?compression=gzip&label=JS+gzip+size)](https://github.com/chichi-framework/chichi/tree/master/dist/js/chichi.min.js)
-[![Backers on Open Collective](https://img.shields.io/opencollective/backers/chichi.svg)](#backers)
-[![Sponsors on Open Collective](https://img.shields.io/opencollective/sponsors/chichi.svg)](#sponsors)
 
 ## What's Included
 
@@ -131,26 +129,6 @@ See [the Releases section of our GitHub project](https://github.com/chichi-frame
 - <https://twitter.com/thecodechef>
 - <https://github.com/thecodechef>
 
-## Backers
-
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/chichiframework#backer)]
-
-[![Backers](https://opencollective.com/chichi-framework/backers.svg?width=890)](https://opencollective.com/chichiframework#backers)
-
-## Sponsors
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/chichiframework#sponsor)]
-
-[![OC sponsor 0](https://opencollective.com/chichiframework/sponsor/0/avatar.svg)](https://opencollective.com/chichiframework/sponsor/0/website)
-[![OC sponsor 1](https://opencollective.com/chichiframework/sponsor/1/avatar.svg)](https://opencollective.com/chichiframework/sponsor/1/website)
-[![OC sponsor 2](https://opencollective.com/chichiframework/sponsor/2/avatar.svg)](https://opencollective.com/chichiframework/sponsor/2/website)
-[![OC sponsor 3](https://opencollective.com/chichiframework/sponsor/3/avatar.svg)](https://opencollective.com/chichiframework/sponsor/3/website)
-[![OC sponsor 4](https://opencollective.com/chichiframework/sponsor/4/avatar.svg)](https://opencollective.com/chichiframework/sponsor/4/website)
-[![OC sponsor 5](https://opencollective.com/chichiframework/sponsor/5/avatar.svg)](https://opencollective.com/chichiframework/sponsor/5/website)
-[![OC sponsor 6](https://opencollective.com/chichiframework/sponsor/6/avatar.svg)](https://opencollective.com/chichiframework/sponsor/6/website)
-[![OC sponsor 7](https://opencollective.com/chichiframework/sponsor/7/avatar.svg)](https://opencollective.com/chichiframework/sponsor/7/website)
-[![OC sponsor 8](https://opencollective.com/chichiframework/sponsor/8/avatar.svg)](https://opencollective.com/chichiframework/sponsor/8/website)
-[![OC sponsor 9](https://opencollective.com/chichiframework/sponsor/9/avatar.svg)](https://opencollective.com/chichiframework/sponsor/9/website)
 
 ## Copyright and license
 
