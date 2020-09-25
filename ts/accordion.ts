@@ -1,7 +1,7 @@
 /**
  * --------------------------------------------------------------------------
- * ChiChi (v0.1.0-alpha1): collapse.ts
- * Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+ * ChiChi (v0.1.0-alpha2): accordion.ts
+ * Licensed under MIT
  * --------------------------------------------------------------------------
  */
 
@@ -21,18 +21,18 @@
  * ------------------------------------------------------------------------
  */
 
- const NAME = 'collapse'
+ const NAME = 'accordion'
  const VERSION = '0.1.0-alpha1'
- const DATA_KEY = 'chichi.collapse'
+ const DATA_KEY = 'chichi.accordion'
  const EVENT_KEY = `.${DATA_KEY}`
  const DATA_API_KEY = '.data-api'
 
- interface CollapseOptions = {
+ interface AccordionOptions = {
    toggle: boolean,
-   parent: (string|element)
+   parent: string|element
  }
 
- const Default: CollapseOptions = {
+ const Default: AccordionOptions = {
    toggle: true,
    parent: ''
  }
@@ -43,16 +43,16 @@
  const EVENT_HIDDEN = `hidden${EVENT_KEY}`
  const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`
 
- const CLASS_NAME_SHOW = 'show'
- const CLASS_NAME_COLLAPSE = 'collapse'
- const CLASS_NAME_COLLAPSING = 'collapsing'
- const CLASS_NAME_COLLAPSED = 'collapsed'
+ const CLASS_NAME_SHOW = 'is-active'
+ const CLASS_NAME_COLLAPSE = 'accordion'
+ const CLASS_NAME_COLLAPSING = 'is-collapsing'
+ const CLASS_NAME_COLLAPSED = 'is-collapsed'
 
  const WIDTH = 'width'
  const HEIGHT = 'height'
 
- const SELECTOR_ACTIVES = '.show, .collapsing'
- const SELECTOR_DATA_TOGGLE = '[data-toggle="collapse"]'
+ const SELECTOR_ACTIVES = '.is-active, .is-collapsing'
+ const SELECTOR_DATA_TOGGLE = '[data-toggle="accordion"]'
 
 /**
  * ------------------------------------------------------------------------
@@ -60,7 +60,7 @@
  * ------------------------------------------------------------------------
  */
 
- class Collapse {
+ class Accordion {
    constructor(element, config) {
      this._isTransitioning = false
      this._element = element
@@ -87,7 +87,7 @@
      this._parent = this._config.parent ? this._getParent() : null
 
      if (!this._config.parent) {
-       this._addAriaAndCollapsedClass(this._element, this._triggerArray)
+       this._addAriaAndAccordiondClass(this._element, this._triggerArray)
      }
 
      if (this._config.toggle) {
@@ -109,7 +109,7 @@
 
    // Public
 
-   toggle() {
+   public toggle() {
      if (this._element.classList.contains(CLASS_NAME_SHOW)) {
        this.hide()
      } else {
@@ -117,7 +117,7 @@
      }
    }
 
-   show() {
+   public show() {
      if (this._isTransitioning ||
        this._element.classList.contains(CLASS_NAME_SHOW)) {
        return
@@ -159,7 +159,7 @@
      if (actives) {
        actives.forEach(elemActive => {
          if (container !== elemActive) {
-           Collapse.collapseInterface(elemActive, 'hide')
+           Accordion.collapseInterface(elemActive, 'hide')
          }
 
          if (!activesData) {
@@ -205,7 +205,7 @@
      this._element.style[dimension] = `${this._element[scrollSize]}px`
    }
 
-   hide() {
+   public hide() {
      if (this._isTransitioning ||
        !this._element.classList.contains(CLASS_NAME_SHOW)) {
        return
@@ -254,11 +254,11 @@
      emulateTransitionEnd(this._element, transitionDuration)
    }
 
-   setTransitioning(isTransitioning) {
+   public setTransitioning(isTransitioning) {
      this._isTransitioning = isTransitioning
    }
 
-   dispose() {
+   public dispose() {
      Data.removeData(this._element, DATA_KEY)
 
      this._config = null
@@ -270,7 +270,7 @@
 
    // Private
 
-   _getConfig(config) {
+   private _getConfig(config) {
      config = {
        ...Default,
        ...config
@@ -279,12 +279,12 @@
      return config
    }
 
-   _getDimension() {
+   private _getDimension() {
      const hasWidth = this._element.classList.contains(WIDTH)
      return hasWidth ? WIDTH : HEIGHT
    }
 
-   _getParent() {
+   private _getParent() {
      let { parent } = this._config
 
      if (isElement(parent)) {
@@ -302,7 +302,7 @@
        .forEach(element => {
          const selected = getElementFromSelector(element)
 
-         this._addAriaAndCollapsedClass(
+         this._addAriaAndAccordiondClass(
            selected,
            [element]
          )
@@ -311,7 +311,7 @@
      return parent
    }
 
-   _addAriaAndCollapsedClass(element, triggerArray) {
+   private _addAriaAndAccordiondClass(element, triggerArray) {
      if (element) {
        const isOpen = element.classList.contains(CLASS_NAME_SHOW)
 
@@ -344,7 +344,7 @@
      }
 
      if (!data) {
-       data = new Collapse(element, _config)
+       data = new Accordion(element, _config)
      }
 
      if (typeof config === 'string') {
@@ -392,7 +392,7 @@
        config = triggerData
      }
 
-     Collapse.collapseInterface(element, config)
+     Accordion.collapseInterface(element, config)
    })
  })
 
@@ -402,4 +402,4 @@
  * ------------------------------------------------------------------------
  */
 
-export default Collapse
+export default Accordion

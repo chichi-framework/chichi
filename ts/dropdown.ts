@@ -1,7 +1,7 @@
 /**
  * --------------------------------------------------------------------------
- * ChiChi (v0.1.0-alpha1): dropdown.ts
- * Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+ * ChiChi (v0.1.0-alpha2): dropdown.ts
+ * Licensed under MIT
  * --------------------------------------------------------------------------
  */
 
@@ -71,12 +71,12 @@
  const PLACEMENT_LEFT = 'left-start'
 
  interface DropdownType = {
-   offset: (number|string|function),
+   offset: number|string|function,
    flip: boolean,
-   boundary: (string|element),
-   reference: (string|element),
+   boundary: string|element,
+   reference: string|element,
    display: string,
-   popperConfig: (null|object)
+   popperConfig: null|object
  }
 
  const Default: DropdownType = {

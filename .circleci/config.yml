@@ -1,18 +1,27 @@
 version: 2.1
 
+executors:
+  python:
+    docker:
+      - image: cimg/python:latest-node
+
 orbs:
   # heroku: circleci/heroku@1.2.2
   node: circleci/node@4.0.0
-  python: circleci/python@1.1.0
   # slack: circleci/slack@3.4.2
 
 jobs:
   install_python_deps:
-    executor: python/default
+    executor: python
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pipenv
+      - restore_cache:
+          key: v1-chichi-pydeps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths: ~/
+      - run: pipenv install
+      - save_cache:
+          key: v1-chichi-pydeps-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths: ~/
 
   install_node_deps:
     executor: node/default
@@ -26,5 +35,8 @@ workflows:
   version: 2
   build:
     jobs:
-      - install_python_deps
+      - install_python_deps:
+        pre_steps:
+          - run: pip3 install pipenv
+
       - install_node_deps

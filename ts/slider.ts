@@ -1,7 +1,7 @@
 /**
  * --------------------------------------------------------------------------
- * ChiChi (v0.1.0-alpha1): slider.ts
- * Licensed under MIT (https://github.com/chichi/chichi/blob/master/LICENSE)
+ * ChiChi (v0.1.0-alpha2): slider.ts
+ * Licensed under MIT
  * --------------------------------------------------------------------------
  */
 
@@ -37,16 +37,16 @@ const ARROW_RIGHT_KEY = 'ArrowRight'
 const TOUCHEVENT_COMPAT_WAIT = 500 // Time for mouse compat events to fire after touch
 const SWIPE_THRESHOLD = 40
 
-interface DefaultType = {
-  interval: (number|boolean),
+interface SliderType = {
+  interval: number|boolean,
   keyboard: boolean,
-  slide: (boolean|string),
-  pause: (string|boolean),
+  slide: boolean|string,
+  pause: string|boolean,
   wrap: boolean,
   touch: boolean
 }
 
-const Default: DefaultType = {
+const Default: SliderType = {
   interval: 5000,
   keyboard: true,
   slide: false,

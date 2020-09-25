@@ -1,5 +1,5 @@
 {
-  "name": "chichi/chichi",
+  "name": "chichi-framework/chichi",
   "description": "The most popular front-end framework for Stylus",
   "keywords": [
     "css",
@@ -19,10 +19,10 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/chichi/chichi/issues"
+    "issues": "https://github.com/chichi-framework/chichi/issues"
   },
   "license": "MIT",
   "replace": {
-    "chichi/chichi": "self.version"
+    "chichi-framework/chichi": "self.version"
   }
 }

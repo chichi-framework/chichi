@@ -19,7 +19,7 @@
   ],
   "ci": {
     "trackBranches": [
-      "master"
+      "main"
     ]
   }
 }
