@@ -1,0 +1,35 @@
+image: Visual Studio 2019
+
+branches:
+  only:
+    - master
+
+platform: Any CPU
+
+init:
+  - git config --global core.autocrlf input
+
+environment:
+  NUGET_DEPLOY_KEY:
+    secure: oy2j6nkbtz56lhvn2ruay6ioumamgsyebf2wkawy5drrm4
+
+matrix:
+  fast_finish: true
+
+cache:
+  - '%LocalAppData%\NuGet\v3-cache'
+
+install:
+  - ps: .\nuget\MyGet.ps1
+
+build:
+  publish_nuget: true
+
+artifacts:
+  - path: **/*.nupkg
+
+deploy:
+  - provider: NuGet
+    skip_symbols: true
+    api_key: {NUGET_DEPLOY_KEY}
+    artifact: /.*\.nupkg/

@@ -45,7 +45,8 @@ Read the [Getting started page](https://chichi.io/docs/0.1.0/getting-started/int
 ## Status
 
 [![Slack](https://img.shields.io/badge/slack-@chichiframework/chichi-purple.svg?logo=slack&style=for-the-badge)](https://app.slack.com/client/T01BD36SW67/C01BK2RPYCC)
-[![Build Status](https://img.shields.io/circleci/build/github/chichi-framework/chichi/master?label=CirleCi&logo=circleci&style=for-the-badge&token=59482c8a0c1e07a1a9ecd4c2454c3f0a161c68c7)](https://app.circleci.com/pipelines/github/chichi-framework/chichi)
+[![CircleCI](https://img.shields.io/circleci/build/github/chichi-framework/chichi/master?label=CirleCi&logo=circleci&style=for-the-badge&token=59482c8a0c1e07a1a9ecd4c2454c3f0a161c68c7)](https://app.circleci.com/pipelines/github/chichi-framework/chichi)
+[![AppVeyor](https://img.shields.io/appveyor/build/chichi-framework/chichi?label=APPVEYOR&logo=APPVEYOR&logoColor=white&style=for-the-badge)](https://ci.appveyor.com/project/thecodechef/chichi)
 [![npm version](https://img.shields.io/npm/v/chichi.svg)](https://www.npmjs.com/package/chichi)
 [![Meteor Atmosphere](https://img.shields.io/badge/meteor-chichi-blue.svg)](https://atmospherejs.com/chichi-framework/chichi)
 [![Packagist Prerelease](https://img.shields.io/packagist/vpre/chichi/chichi.svg)](https://packagist.org/packages/chichi/chichi)

@@ -5,15 +5,11 @@
  * --------------------------------------------------------------------------
  */
 
- import {
-   TRANSITION_END,
-  emulateTransitionEnd,
-  getSelectorFromElement,
-  getElementFromSelector,
-  getTransitionDurationFromElement,
-  isElement,
-  reflow
-} from '@utils/index'
+import { TRANSITION_END, emulateTransitionEnd, getSelectorFromElement, getElementFromSelector, getTransitionDurationFromElement, isElement, reflow } from './util/index'
+import Data from './dom/data'
+import EventHandler from './dom/event-handler'
+import Manipulator from './dom/manipulator'
+import SelectorEngine from './dom/selector-engine'
 
 /**
  * ------------------------------------------------------------------------
@@ -21,38 +17,34 @@
  * ------------------------------------------------------------------------
  */
 
- const NAME = 'accordion'
- const VERSION = '0.1.0-alpha1'
- const DATA_KEY = 'chichi.accordion'
- const EVENT_KEY = `.${DATA_KEY}`
- const DATA_API_KEY = '.data-api'
+ const ACCORDION_NAME = 'accordion'
+ const ACCORDION_VERSION = '0.1.0-alpha1'
 
- interface AccordionOptions = {
-   toggle: boolean,
-   parent: string|element
- }
+ const ACCORDION_DATA_KEY = 'chichi.accordion'
+ const ACCORDION_EVENT_KEY = `.${ACCORDION_DATA_KEY}`
+ const ACCORDION_DATA_API_KEY = '.data-api'
 
- const Default: AccordionOptions = {
+ const AccordionDefaults = {
    toggle: true,
    parent: ''
  }
 
- const EVENT_SHOW = `show${EVENT_KEY}`
- const EVENT_SHOWN = `shown${EVENT_KEY}`
- const EVENT_HIDE = `hide${EVENT_KEY}`
- const EVENT_HIDDEN = `hidden${EVENT_KEY}`
- const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`
+ const ACCORDION_EVENT_SHOW = `show${ACCORDION_EVENT_KEY}`
+ const ACCORDION_EVENT_SHOWN = `shown${ACCORDION_EVENT_KEY}`
+ const ACCORDION_EVENT_HIDE = `hide${ACCORDION_EVENT_KEY}`
+ const ACCORDION_EVENT_HIDDEN = `hidden${ACCORDION_EVENT_KEY}`
+ const ACCORDION_EVENT_CLICK_DATA_API = `click${ACCORDION_EVENT_KEY}${ACCORDION_DATA_API_KEY}`
 
- const CLASS_NAME_SHOW = 'is-active'
- const CLASS_NAME_COLLAPSE = 'accordion'
- const CLASS_NAME_COLLAPSING = 'is-collapsing'
- const CLASS_NAME_COLLAPSED = 'is-collapsed'
+ const ACCORDION_CLASS_NAME_SHOW = 'is-active'
+ const ACCORDION_CLASS_NAME_COLLAPSE = 'accordion'
+ const ACCORDION_CLASS_NAME_COLLAPSING = 'is-collapsing'
+ const ACCORDION_CLASS_NAME_COLLAPSED = 'is-collapsed'
 
- const WIDTH = 'width'
- const HEIGHT = 'height'
+ const ACCORDION_WIDTH = 'width'
+ const ACCORDION_HEIGHT = 'height'
 
- const SELECTOR_ACTIVES = '.is-active, .is-collapsing'
- const SELECTOR_DATA_TOGGLE = '[data-toggle="accordion"]'
+ const ACCORDION_SELECTOR_ACTIVES = '.is-active, .is-collapsing'
+ const ACCORDION_SELECTOR_DATA_TOGGLE = '[data-toggle="accordion"]'
 
 /**
  * ------------------------------------------------------------------------
@@ -66,11 +58,11 @@
      this._element = element
      this._config = this._getConfig(config)
      this._triggerArray = SelectorEngine.find(
-       `${SELECTOR_DATA_TOGGLE}[href="#${element.id}"],` +
-       `${SELECTOR_DATA_TOGGLE}[data-target="#${element.id}"]`
+       `${ACCORDION_SELECTOR_DATA_TOGGLE}[href="#${element.id}"],` +
+       `${ACCORDION_SELECTOR_DATA_TOGGLE}[data-target="#${element.id}"]`
      )
 
-     const toggleList = SelectorEngine.find(SELECTOR_DATA_TOGGLE)
+     const toggleList = SelectorEngine.find(ACCORDION_SELECTOR_DATA_TOGGLE)
 
      for (let i = 0, len = toggleList.length; i < len; i++) {
        const elem = toggleList[i]
@@ -94,7 +86,7 @@
        this.toggle()
      }
 
-     Data.setData(element, DATA_KEY, this)
+     Data.setData(element, ACCORDION_DATA_KEY, this)
    }
 
    // Getters
@@ -104,22 +96,22 @@
    }
 
    static get Default() {
-     return Default
+     return AccordionDefaults
    }
 
    // Public
 
-   public toggle() {
-     if (this._element.classList.contains(CLASS_NAME_SHOW)) {
+  toggle() {
+     if (this._element.classList.contains(ACCORDION_CLASS_NAME_SHOW)) {
        this.hide()
      } else {
        this.show()
      }
    }
 
-   public show() {
+  show() {
      if (this._isTransitioning ||
-       this._element.classList.contains(CLASS_NAME_SHOW)) {
+       this._element.classList.contains(ACCORDION_CLASS_NAME_SHOW)) {
        return
      }
 
@@ -127,13 +119,13 @@
      let activesData
 
      if (this._parent) {
-       actives = SelectorEngine.find(SELECTOR_ACTIVES, this._parent)
+       actives = SelectorEngine.find(ACCORDION_SELECTOR_ACTIVES, this._parent)
          .filter(elem => {
            if (typeof this._config.parent === 'string') {
              return elem.getAttribute('data-parent') === this._config.parent
            }
 
-           return elem.classList.contains(CLASS_NAME_COLLAPSE)
+           return elem.classList.contains(ACCORDION_CLASS_NAME_COLLAPSE)
          })
 
        if (actives.length === 0) {
@@ -144,14 +136,14 @@
      const container = SelectorEngine.findOne(this._selector)
      if (actives) {
        const tempActiveData = actives.filter(elem => container !== elem)
-       activesData = tempActiveData[0] ? Data.getData(tempActiveData[0], DATA_KEY) : null
+       activesData = tempActiveData[0] ? Data.getData(tempActiveData[0], ACCORDION_DATA_KEY) : null
 
        if (activesData && activesData._isTransitioning) {
          return
        }
      }
 
-     const startEvent = EventHandler.trigger(this._element, EVENT_SHOW)
+     const startEvent = EventHandler.trigger(this._element, ACCORDION_EVENT_SHOW)
      if (startEvent.defaultPrevented) {
        return
      }
@@ -163,21 +155,21 @@
          }
 
          if (!activesData) {
-           Data.setData(elemActive, DATA_KEY, null)
+           Data.setData(elemActive, ACCORDION_DATA_KEY, null)
          }
        })
      }
 
      const dimension = this._getDimension()
 
-     this._element.classList.remove(CLASS_NAME_COLLAPSE)
-     this._element.classList.add(CLASS_NAME_COLLAPSING)
+     this._element.classList.remove(ACCORDION_CLASS_NAME_COLLAPSE)
+     this._element.classList.add(ACCORDION_CLASS_NAME_COLLAPSING)
 
      this._element.style[dimension] = 0
 
      if (this._triggerArray.length) {
        this._triggerArray.forEach(element => {
-         element.classList.remove(CLASS_NAME_COLLAPSED)
+         element.classList.remove(ACCORDION_CLASS_NAME_COLLAPSED)
          element.setAttribute('aria-expanded', true)
        })
      }
@@ -185,14 +177,14 @@
      this.setTransitioning(true)
 
      const complete = () => {
-       this._element.classList.remove(CLASS_NAME_COLLAPSING)
-       this._element.classList.add(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW)
+       this._element.classList.remove(ACCORDION_CLASS_NAME_COLLAPSING)
+       this._element.classList.add(ACCORDION_CLASS_NAME_COLLAPSE, ACCORDION_CLASS_NAME_SHOW)
 
        this._element.style[dimension] = ''
 
        this.setTransitioning(false)
 
-       EventHandler.trigger(this._element, EVENT_SHOWN)
+       EventHandler.trigger(this._element, ACCORDION_EVENT_SHOWN)
      }
 
      const capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1)
@@ -205,13 +197,13 @@
      this._element.style[dimension] = `${this._element[scrollSize]}px`
    }
 
-   public hide() {
+  hide() {
      if (this._isTransitioning ||
-       !this._element.classList.contains(CLASS_NAME_SHOW)) {
+       !this._element.classList.contains(ACCORDION_CLASS_NAME_SHOW)) {
        return
      }
 
-     const startEvent = EventHandler.trigger(this._element, EVENT_HIDE)
+     const startEvent = EventHandler.trigger(this._element, ACCORDION_EVENT_HIDE)
      if (startEvent.defaultPrevented) {
        return
      }
@@ -222,8 +214,8 @@
 
      reflow(this._element)
 
-     this._element.classList.add(CLASS_NAME_COLLAPSING)
-     this._element.classList.remove(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW)
+     this._element.classList.add(ACCORDION_CLASS_NAME_COLLAPSING)
+     this._element.classList.remove(ACCORDION_CLASS_NAME_COLLAPSE, ACCORDION_CLASS_NAME_SHOW)
 
      const triggerArrayLength = this._triggerArray.length
      if (triggerArrayLength > 0) {
@@ -231,8 +223,8 @@
          const trigger = this._triggerArray[i]
          const elem = getElementFromSelector(trigger)
 
-         if (elem && !elem.classList.contains(CLASS_NAME_SHOW)) {
-           trigger.classList.add(CLASS_NAME_COLLAPSED)
+         if (elem && !elem.classList.contains(ACCORDION_CLASS_NAME_SHOW)) {
+           trigger.classList.add(ACCORDION_CLASS_NAME_COLLAPSED)
            trigger.setAttribute('aria-expanded', false)
          }
        }
@@ -242,9 +234,9 @@
 
      const complete = () => {
        this.setTransitioning(false)
-       this._element.classList.remove(CLASS_NAME_COLLAPSING)
-       this._element.classList.add(CLASS_NAME_COLLAPSE)
-       EventHandler.trigger(this._element, EVENT_HIDDEN)
+       this._element.classList.remove(ACCORDION_CLASS_NAME_COLLAPSING)
+       this._element.classList.add(ACCORDION_CLASS_NAME_COLLAPSE)
+       EventHandler.trigger(this._element, ACCORDION_EVENT_HIDDEN)
      }
 
      this._element.style[dimension] = ''
@@ -254,12 +246,12 @@
      emulateTransitionEnd(this._element, transitionDuration)
    }
 
-   public setTransitioning(isTransitioning) {
+  setTransitioning(isTransitioning) {
      this._isTransitioning = isTransitioning
    }
 
-   public dispose() {
-     Data.removeData(this._element, DATA_KEY)
+  dispose() {
+     Data.removeData(this._element, ACCORDION_DATA_KEY)
 
      this._config = null
      this._parent = null
@@ -270,21 +262,21 @@
 
    // Private
 
-   private _getConfig(config) {
+  _getConfig(config) {
      config = {
-       ...Default,
+       ...AccordionDefaults,
        ...config
      }
      config.toggle = Boolean(config.toggle) // Coerce string values
      return config
    }
 
-   private _getDimension() {
-     const hasWidth = this._element.classList.contains(WIDTH)
-     return hasWidth ? WIDTH : HEIGHT
+  _getDimension() {
+     const hasWidth = this._element.classList.contains(ACCORDION_WIDTH)
+     return hasWidth ? ACCORDION_WIDTH : ACCORDION_HEIGHT
    }
 
-   private _getParent() {
+  _getParent() {
      let { parent } = this._config
 
      if (isElement(parent)) {
@@ -296,7 +288,7 @@
        parent = SelectorEngine.findOne(parent)
      }
 
-     const selector = `${SELECTOR_DATA_TOGGLE}[data-parent="${parent}"]`
+     const selector = `${ACCORDION_SELECTOR_DATA_TOGGLE}[data-parent="${parent}"]`
 
      SelectorEngine.find(selector, parent)
        .forEach(element => {
@@ -311,16 +303,16 @@
      return parent
    }
 
-   private _addAriaAndAccordiondClass(element, triggerArray) {
+  _addAriaAndAccordiondClass(element, triggerArray) {
      if (element) {
-       const isOpen = element.classList.contains(CLASS_NAME_SHOW)
+       const isOpen = element.classList.contains(ACCORDION_CLASS_NAME_SHOW)
 
        if (triggerArray.length) {
          triggerArray.forEach(elem => {
            if (isOpen) {
-             elem.classList.remove(CLASS_NAME_COLLAPSED)
+             elem.classList.remove(ACCORDION_CLASS_NAME_COLLAPSED)
            } else {
-             elem.classList.add(CLASS_NAME_COLLAPSED)
+             elem.classList.add(ACCORDION_CLASS_NAME_COLLAPSED)
            }
 
            elem.setAttribute('aria-expanded', isOpen)
@@ -332,9 +324,9 @@
    // Static
 
    static collapseInterface(element, config) {
-     let data = Data.getData(element, DATA_KEY)
+     let data = Data.getData(element, ACCORDION_DATA_KEY)
      const _config = {
-       ...Default,
+       ...AccordionDefaults,
        ...Manipulator.getDataAttributes(element),
        ...typeof config === 'object' && config ? config : {}
      }
@@ -357,7 +349,7 @@
    }
 
    static getInstance(element) {
-     return Data.getData(element, DATA_KEY)
+     return Data.getData(element, ACCORDION_DATA_KEY)
    }
  }
 
@@ -367,7 +359,7 @@
  * ------------------------------------------------------------------------
  */
 
- EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
+ EventHandler.on(document, ACCORDION_EVENT_CLICK_DATA_API, ACCORDION_SELECTOR_DATA_TOGGLE, function (event) {
    // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
    if (event.target.tagName === 'A') {
      event.preventDefault()
@@ -378,7 +370,7 @@
    const selectorElements = SelectorEngine.find(selector)
 
    selectorElements.forEach(element => {
-     const data = Data.getData(element, DATA_KEY)
+     const data = Data.getData(element, ACCORDION_DATA_KEY)
      let config
      if (data) {
        // update parent attribute

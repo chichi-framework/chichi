@@ -1,0 +1,17 @@
+extends:
+  - stylelint-config-recommended
+  - stylelint-config-standard
+  - stylelint-plugin-stylus/recommended
+  - stylelint-plugin-stylus/standard
+plugins:
+  - stylelint-plugin-stylus
+rules:
+  comment-word-disallowed-list:
+    - /^TODO:/
+    - /^FIXME:/
+    - /^ISSUE:/
+    - /^HELP(?:\sWANTED)?:/
+    - /^CAUTION:/
+    - /^WARN(?:ING)?:/
+    - /^DANGER:/
+    - /^ERROR:/

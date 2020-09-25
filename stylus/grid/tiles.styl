@@ -31,7 +31,7 @@
   +tablet()
     &:not(.is-child)
       display: flex
-    for $i range(1, 12)
+    for $i in range(1, 12)
       &.is-{$i}
         flex: none
         width: ($i / 12) * 100%

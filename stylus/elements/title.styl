@@ -35,7 +35,7 @@
     margin-top: $subtitle-negative_margin
   // Sizes
   for $size in $sizes
-    $i: index($sizes, $size)
+    $i = index($sizes, $size)
     &.is-#{$i}
       font-size: $size
 

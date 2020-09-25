@@ -5,13 +5,7 @@
  * --------------------------------------------------------------------------
  */
 
- import {
-   getjQuery,
-   getElementFromSelector,
-   isElement,
-   isVisible,
-   noop
- } from './util/index'
+ import { getElementFromSelector, isElement, isVisible, noop } from './util/index'
  import Data from './dom/data'
  import EventHandler from './dom/event-handler'
  import Manipulator from './dom/manipulator'
@@ -24,62 +18,53 @@
   * ------------------------------------------------------------------------
   */
 
- const NAME = 'dropdown'
- const VERSION = '0.1.0-alpha1'
- const DATA_KEY = 'chichi.dropdown'
- const EVENT_KEY = `.${DATA_KEY}`
- const DATA_API_KEY = '.data-api'
+ const DROPDOWN_NAME = 'dropdown'
+ const DROPDOWN_VERSION = '0.1.0-alpha1'
+ const DROPDOWN_DATA_KEY = 'chichi.dropdown'
+ const DROPDOWN_EVENT_KEY = `.${DROPDOWN_DATA_KEY}`
+ const DROPDOWN_DATA_API_KEY = '.data-api'
 
- const ESCAPE_KEY = 'Escape'
- const SPACE_KEY = 'Space'
- const TAB_KEY = 'Tab'
- const ARROW_UP_KEY = 'ArrowUp'
- const ARROW_DOWN_KEY = 'ArrowDown'
- const RIGHT_MOUSE_BUTTON = 2 // MouseEvent.button value for the secondary button, usually the right button
+ const DROPDOWN_ESCAPE_KEY = 'Escape'
+ const DROPDOWN_SPACE_KEY = 'Space'
+ const DROPDOWN_TAB_KEY = 'Tab'
+ const DROPDOWN_ARROW_UP_KEY = 'ArrowUp'
+ const DROPDOWN_ARROW_DOWN_KEY = 'ArrowDown'
+ const DROPDOWN_RIGHT_MOUSE_BUTTON = 2 // MouseEvent.button value for the secondary button, usually the right button
 
- const REGEXP_KEYDOWN = new RegExp(`${ARROW_UP_KEY}|${ARROW_DOWN_KEY}|${ESCAPE_KEY}`)
+ const DROPDOWN_REGEXP_KEYDOWN = new RegExp(`${DROPDOWN_ARROW_UP_KEY}|${DROPDOWN_ARROW_DOWN_KEY}|${DROPDOWN_ESCAPE_KEY}`)
 
- const EVENT_HIDE = `hide${EVENT_KEY}`
- const EVENT_HIDDEN = `hidden${EVENT_KEY}`
- const EVENT_SHOW = `show${EVENT_KEY}`
- const EVENT_SHOWN = `shown${EVENT_KEY}`
- const EVENT_CLICK = `click${EVENT_KEY}`
- const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`
- const EVENT_KEYDOWN_DATA_API = `keydown${EVENT_KEY}${DATA_API_KEY}`
- const EVENT_KEYUP_DATA_API = `keyup${EVENT_KEY}${DATA_API_KEY}`
+ const DROPDOWN_EVENT_HIDE = `hide${DROPDOWN_EVENT_KEY}`
+ const DROPDOWN_EVENT_HIDDEN = `hidden${DROPDOWN_EVENT_KEY}`
+ const DROPDOWN_EVENT_SHOW = `show${DROPDOWN_EVENT_KEY}`
+ const DROPDOWN_EVENT_SHOWN = `shown${DROPDOWN_EVENT_KEY}`
+ const DROPDOWN_EVENT_CLICK = `click${DROPDOWN_EVENT_KEY}`
+ const DROPDOWN_EVENT_CLICK_DATA_API = `click${DROPDOWN_EVENT_KEY}${DATA_API_KEY}`
+ const DROPDOWN_EVENT_KEYDOWN_DATA_API = `keydown${DROPDOWN_EVENT_KEY}${DATA_API_KEY}`
+ const DROPDOWN_EVENT_KEYUP_DATA_API = `keyup${DROPDOWN_EVENT_KEY}${DATA_API_KEY}`
 
- const CLASS_NAME_DISABLED = 'disabled'
- const CLASS_NAME_ACTIVE = 'is-active'
- const CLASS_NAME_DROPUP = 'is-up'
- const CLASS_NAME_DROPRIGHT = 'is-right'
- const CLASS_NAME_DROPLEFT = 'is-left'
- const CLASS_NAME_MENURIGHT = 'dropdown-menu-right'
- const CLASS_NAME_NAVBAR = 'navbar'
- const CLASS_NAME_POSITION_STATIC = 'is-static'
+ const DROPDOWN_CLASS_NAME_DISABLED = 'disabled'
+ const DROPDOWN_CLASS_NAME_ACTIVE = 'is-active'
+ const DROPDOWN_CLASS_NAME_DROPUP = 'is-up'
+ const DROPDOWN_CLASS_NAME_DROPRIGHT = 'is-right'
+ const DROPDOWN_CLASS_NAME_DROPLEFT = 'is-left'
+ const DROPDOWN_CLASS_NAME_MENURIGHT = 'dropdown-menu-right'
+ const DROPDOWN_CLASS_NAME_NAVBAR = 'navbar'
+ const DROPDOWN_CLASS_NAME_POSITION_STATIC = 'is-static'
 
- const SELECTOR_DATA_TOGGLE = '[data-toggle="dropdown"]'
- const SELECTOR_FORM_CHILD = '.dropdown form'
- const SELECTOR_MENU = '.dropdown-menu'
- const SELECTOR_NAVBAR_NAV = '.navbar-item'
- const SELECTOR_VISIBLE_ITEMS = '.dropdown-menu .dropdown-item:not(.disabled):not(:disabled)'
+ const DROPDOWN_SELECTOR_DATA_TOGGLE = '[data-toggle="dropdown"]'
+ const DROPDOWN_SELECTOR_FORM_CHILD = '.dropdown form'
+ const DROPDOWN_SELECTOR_MENU = '.dropdown-menu'
+ const DROPDOWN_SELECTOR_NAVBAR_NAV = '.navbar-item'
+ const DROPDOWN_SELECTOR_VISIBLE_ITEMS = '.dropdown-menu .dropdown-item:not(.disabled):not(:disabled)'
 
- const PLACEMENT_TOP = 'top-start'
- const PLACEMENT_TOPEND = 'top-end'
- const PLACEMENT_BOTTOM = 'bottom-start'
- const PLACEMENT_BOTTOMEND = 'bottom-end'
- const PLACEMENT_RIGHT = 'right-start'
- const PLACEMENT_LEFT = 'left-start'
+ const DROPDOWN_PLACEMENT_TOP = 'top-start'
+ const DROPDOWN_PLACEMENT_TOPEND = 'top-end'
+ const DROPDOWN_PLACEMENT_BOTTOM = 'bottom-start'
+ const DROPDOWN_PLACEMENT_BOTTOMEND = 'bottom-end'
+ const DROPDOWN_PLACEMENT_RIGHT = 'right-start'
+ const DROPDOWN_PLACEMENT_LEFT = 'left-start'
 
- interface DropdownType = {
-   offset: number|string|function,
-   flip: boolean,
-   boundary: string|element,
-   reference: string|element,
-   display: string,
-   popperConfig: null|object
- }
-
- const Default: DropdownType = {
+ const DropdownDefaults = {
    offset: 0,
    flip: true,
    boundary: 'scrollParent',
@@ -103,31 +88,27 @@
      this._inNavbar = this._detectNavbar()
 
      this._addEventListeners()
-     Data.setData(element, DATA_KEY, this)
+     Data.setData(element, DROPDOWN_DATA_KEY, this)
    }
 
    // Getters
 
    static get VERSION() {
-     return VERSION
+     return DROPDOWN_VERSION
    }
 
    static get Default() {
-     return Default
-   }
-
-   static get DefaultType() {
-     return DefaultType
+     return DropdownDefaults
    }
 
    // Public
 
    toggle() {
-     if (this._element.disabled || this._element.classList.contains(CLASS_NAME_DISABLED)) {
+     if (this._element.disabled || this._element.classList.contains(DROPDOWN_CLASS_NAME_DISABLED)) {
        return
      }
 
-     const isActive = this._element.classList.contains(CLASS_NAME_ACTIVE)
+     const isActive = this._element.classList.contains(DROPDOWN_CLASS_NAME_ACTIVE)
 
      Dropdown.clearMenus()
 
@@ -139,7 +120,7 @@
    }
 
    show() {
-     if (this._element.disabled || this._element.classList.contains(CLASS_NAME_DISABLED) || this._menu.classList.contains(CLASS_NAME_ACTIVE)) {
+     if (this._element.disabled || this._element.classList.contains(DROPDOWN_CLASS_NAME_DISABLED) || this._menu.classList.contains(DROPDOWN_CLASS_NAME_ACTIVE)) {
        return
      }
 
@@ -148,7 +129,7 @@
        relatedTarget: this._element
      }
 
-     const showEvent = EventHandler.trigger(this._element, EVENT_SHOW, relatedTarget)
+     const showEvent = EventHandler.trigger(this._element, DROPDOWN_DROPDOWN_EVENT_SHOW, relatedTarget)
 
      if (showEvent.defaultPrevented) {
        return
@@ -177,7 +158,7 @@
        // to allow the menu to "escape" the scroll parent's boundaries
        // https://github.com/twbs/bootstrap/issues/24251
        if (this._config.boundary !== 'scrollParent') {
-         parent.classList.add(CLASS_NAME_POSITION_STATIC)
+         parent.classList.add(DROPDOWN_CLASS_NAME_POSITION_STATIC)
        }
 
        this._popper = new Popper(referenceElement, this._menu, this._getPopperConfig())
@@ -188,7 +169,7 @@
      // only needed because of broken event delegation on iOS
      // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
      if ('ontouchstart' in document.documentElement &&
-       !parent.closest(SELECTOR_NAVBAR_NAV)) {
+       !parent.closest(DROPDOWN_SELECTOR_NAVBAR_NAV)) {
        [].concat(...document.body.children)
          .forEach(elem => EventHandler.on(elem, 'mouseover', null, noop()))
      }
@@ -196,13 +177,13 @@
      this._element.focus()
      this._element.setAttribute('aria-expanded', true)
 
-     Manipulator.toggleClass(this._menu, CLASS_NAME_ACTIVE)
-     Manipulator.toggleClass(this._element, CLASS_NAME_ACTIVE)
-     EventHandler.trigger(parent, EVENT_SHOWN, relatedTarget)
+     Manipulator.toggleClass(this._menu, DROPDOWN_CLASS_NAME_ACTIVE)
+     Manipulator.toggleClass(this._element, DROPDOWN_CLASS_NAME_ACTIVE)
+     EventHandler.trigger(parent, DROPDOWN_EVENT_SHOWN, relatedTarget)
    }
 
    hide() {
-     if (this._element.disabled || this._element.classList.contains(CLASS_NAME_DISABLED) || !this._menu.classList.contains(CLASS_NAME_ACTIVE)) {
+     if (this._element.disabled || this._element.classList.contains(DROPDOWN_CLASS_NAME_DISABLED) || !this._menu.classList.contains(DROPDOWN_CLASS_NAME_ACTIVE)) {
        return
      }
 
@@ -211,7 +192,7 @@
        relatedTarget: this._element
      }
 
-     const hideEvent = EventHandler.trigger(parent, EVENT_HIDE, relatedTarget)
+     const hideEvent = EventHandler.trigger(parent, DROPDOWN_EVENT_HIDE, relatedTarget)
 
      if (hideEvent.defaultPrevented) {
        return
@@ -221,14 +202,14 @@
        this._popper.destroy()
      }
 
-     Manipulator.toggleClass(this._menu, CLASS_NAME_ACTIVE)
-     Manipulator.toggleClass(this._element, CLASS_NAME_ACTIVE)
-     EventHandler.trigger(parent, EVENT_HIDDEN, relatedTarget)
+     Manipulator.toggleClass(this._menu, DROPDOWN_CLASS_NAME_ACTIVE)
+     Manipulator.toggleClass(this._element, DROPDOWN_CLASS_NAME_ACTIVE)
+     EventHandler.trigger(parent, DROPDOWN_EVENT_HIDDEN, relatedTarget)
    }
 
    dispose() {
-     Data.removeData(this._element, DATA_KEY)
-     EventHandler.off(this._element, EVENT_KEY)
+     Data.removeData(this._element, DROPDOWN_DATA_KEY)
+     EventHandler.off(this._element, DROPDOWN_EVENT_KEY)
      this._element = null
      this._menu = null
      if (this._popper) {
@@ -247,7 +228,7 @@
    // Private
 
    _addEventListeners() {
-     EventHandler.on(this._element, EVENT_CLICK, event => {
+     EventHandler.on(this._element, DROPDOWN_EVENT_CLICK, event => {
        event.preventDefault()
        event.stopPropagation()
        this.toggle()
@@ -265,32 +246,32 @@
    }
 
    _getMenuElement() {
-     return SelectorEngine.next(this._element, SELECTOR_MENU)[0]
+     return SelectorEngine.next(this._element, DROPDOWN_SELECTOR_MENU)[0]
    }
 
    _getPlacement() {
      const parentDropdown = this._element.parentNode
-     let placement = PLACEMENT_BOTTOM
+     let placement = DROPDOWN_PLACEMENT_BOTTOM
 
      // Handle dropup
-     if (parentDropdown.classList.contains(CLASS_NAME_DROPUP)) {
-       placement = PLACEMENT_TOP
-       if (this._menu.classList.contains(CLASS_NAME_MENURIGHT)) {
-         placement = PLACEMENT_TOPEND
+     if (parentDropdown.classList.contains(DROPDOWN_CLASS_NAME_DROPUP)) {
+       placement = DROPDOWN_PLACEMENT_TOP
+       if (this._menu.classList.contains(DROPDOWN_CLASS_NAME_MENURIGHT)) {
+         placement = DROPDOWN_PLACEMENT_TOPEND
        }
-     } else if (parentDropdown.classList.contains(CLASS_NAME_DROPRIGHT)) {
-       placement = PLACEMENT_RIGHT
-     } else if (parentDropdown.classList.contains(CLASS_NAME_DROPLEFT)) {
-       placement = PLACEMENT_LEFT
-     } else if (this._menu.classList.contains(CLASS_NAME_MENURIGHT)) {
-       placement = PLACEMENT_BOTTOMEND
+     } else if (parentDropdown.classList.contains(DROPDOWN_CLASS_NAME_DROPRIGHT)) {
+       placement = DROPDOWN_PLACEMENT_RIGHT
+     } else if (parentDropdown.classList.contains(DROPDOWN_CLASS_NAME_DROPLEFT)) {
+       placement = DROPDOWN_PLACEMENT_LEFT
+     } else if (this._menu.classList.contains(DROPDOWN_CLASS_NAME_MENURIGHT)) {
+       placement = DROPDOWN_PLACEMENT_BOTTOMEND
      }
 
      return placement
    }
 
    _detectNavbar() {
-     return Boolean(this._element.closest(`.${CLASS_NAME_NAVBAR}`))
+     return Boolean(this._element.closest(`.${DROPDOWN_CLASS_NAME_NAVBAR}`))
    }
 
    _getOffset() {
@@ -342,7 +323,7 @@
    // Static
 
    static dropdownInterface(element, config) {
-     let data = Data.getData(element, DATA_KEY)
+     let data = Data.getData(element, DROPDOWN_DATA_KEY)
      const _config = typeof config === 'object' ? config : null
 
      if (!data) {
@@ -359,16 +340,16 @@
    }
 
    static clearMenus(event) {
-     if (event && (event.button === RIGHT_MOUSE_BUTTON ||
-       (event.type === 'keyup' && event.key !== TAB_KEY))) {
+     if (event && (event.button === DROPDOWN_RIGHT_MOUSE_BUTTON ||
+       (event.type === 'keyup' && event.key !== DROPDOWN_TAB_KEY))) {
        return
      }
 
-     const toggles = SelectorEngine.find(SELECTOR_DATA_TOGGLE)
+     const toggles = SelectorEngine.find(DROPDOWN_SELECTOR_DATA_TOGGLE)
 
      for (let i = 0, len = toggles.length; i < len; i++) {
        const parent = Dropdown.getParentFromElement(toggles[i])
-       const context = Data.getData(toggles[i], DATA_KEY)
+       const context = Data.getData(toggles[i], DROPDOWN_DATA_KEY)
        const relatedTarget = {
          relatedTarget: toggles[i]
        }
@@ -382,18 +363,18 @@
        }
 
        const dropdownMenu = context._menu
-       if (!toggles[i].classList.contains(CLASS_NAME_ACTIVE)) {
+       if (!toggles[i].classList.contains(DROPDOWN_CLASS_NAME_ACTIVE)) {
          continue
        }
 
        if (event && ((event.type === 'click' &&
            /input|textarea/i.test(event.target.tagName)) ||
-           (event.type === 'keyup' && event.key === TAB_KEY)) &&
+           (event.type === 'keyup' && event.key === DROPDOWN_TAB_KEY)) &&
            dropdownMenu.contains(event.target)) {
          continue
        }
 
-       const hideEvent = EventHandler.trigger(parent, EVENT_HIDE, relatedTarget)
+       const hideEvent = EventHandler.trigger(parent, DROPDOWN_EVENT_HIDE, relatedTarget)
        if (hideEvent.defaultPrevented) {
          continue
        }
@@ -411,9 +392,9 @@
          context._popper.destroy()
        }
 
-       dropdownMenu.classList.remove(CLASS_NAME_ACTIVE)
-       toggles[i].classList.remove(CLASS_NAME_ACTIVE)
-       EventHandler.trigger(parent, EVENT_HIDDEN, relatedTarget)
+       dropdownMenu.classList.remove(DROPDOWN_CLASS_NAME_ACTIVE)
+       toggles[i].classList.remove(DROPDOWN_CLASS_NAME_ACTIVE)
+       EventHandler.trigger(parent, DROPDOWN_EVENT_HIDDEN, relatedTarget)
      }
    }
 
@@ -430,36 +411,36 @@
      //    - If key is not up or down => not a dropdown command
      //    - If trigger inside the menu => not a dropdown command
      if (/input|textarea/i.test(event.target.tagName) ?
-       event.key === SPACE_KEY || (event.key !== ESCAPE_KEY &&
-       ((event.key !== ARROW_DOWN_KEY && event.key !== ARROW_UP_KEY) ||
-         event.target.closest(SELECTOR_MENU))) :
-       !REGEXP_KEYDOWN.test(event.key)) {
+       event.key === DROPDOWN_SPACE_KEY || (event.key !== DROPDOWN_ESCAPE_KEY &&
+       ((event.key !== DROPDOWN_ARROW_DOWN_KEY && event.key !== DROPDOWN_ARROW_UP_KEY) ||
+         event.target.closest(DROPDOWN_SELECTOR_MENU))) :
+       !DROPDOWN_REGEXP_KEYDOWN.test(event.key)) {
        return
      }
 
      event.preventDefault()
      event.stopPropagation()
 
-     if (this.disabled || this.classList.contains(CLASS_NAME_DISABLED)) {
+     if (this.disabled || this.classList.contains(DROPDOWN_CLASS_NAME_DISABLED)) {
        return
      }
 
      const parent = Dropdown.getParentFromElement(this)
-     const isActive = this.classList.contains(CLASS_NAME_ACTIVE)
+     const isActive = this.classList.contains(DROPDOWN_CLASS_NAME_ACTIVE)
 
-     if (event.key === ESCAPE_KEY) {
-       const button = this.matches(SELECTOR_DATA_TOGGLE) ? this : SelectorEngine.prev(this, SELECTOR_DATA_TOGGLE)[0]
+     if (event.key === DROPDOWN_ESCAPE_KEY) {
+       const button = this.matches(SDROPDOWN_ELECTOR_DATA_TOGGLE) ? this : SelectorEngine.prev(this, DROPDOWN_SELECTOR_DATA_TOGGLE)[0]
        button.focus()
        Dropdown.clearMenus()
        return
      }
 
-     if (!isActive || event.key === SPACE_KEY) {
+     if (!isActive || event.key === DROPDOWN_SPACE_KEY) {
        Dropdown.clearMenus()
        return
      }
 
-     const items = SelectorEngine.find(SELECTOR_VISIBLE_ITEMS, parent)
+     const items = SelectorEngine.find(DROPDOWN_SELECTOR_VISIBLE_ITEMS, parent)
        .filter(isVisible)
 
      if (!items.length) {
@@ -468,11 +449,11 @@
 
      let index = items.indexOf(event.target)
 
-     if (event.key === ARROW_UP_KEY && index > 0) { // Up
+     if (event.key === DROPDOWN_ARROW_UP_KEY && index > 0) { // Up
        index--
      }
 
-     if (event.key === ARROW_DOWN_KEY && index < items.length - 1) { // Down
+     if (event.key === DROPDOWN_ARROW_DOWN_KEY && index < items.length - 1) { // Down
        index++
      }
 
@@ -483,7 +464,7 @@
    }
 
    static getInstance(element) {
-     return Data.getData(element, DATA_KEY)
+     return Data.getData(element, DROPDOWN_DATA_KEY)
    }
  }
 
@@ -493,17 +474,17 @@
 * ------------------------------------------------------------------------
 */
 
- EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE, Dropdown.dataApiKeydownHandler)
- EventHandler.on(document, EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown.dataApiKeydownHandler)
- EventHandler.on(document, EVENT_CLICK_DATA_API, Dropdown.clearMenus)
- EventHandler.on(document, EVENT_KEYUP_DATA_API, Dropdown.clearMenus)
- EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
+ EventHandler.on(document, DROPDOWN_EVENT_KEYDOWN_DATA_API, DROPDOWN_SELECTOR_DATA_TOGGLE, Dropdown.dataApiKeydownHandler)
+ EventHandler.on(document, DROPDOWN_EVENT_KEYDOWN_DATA_API, DROPDOWN_SELECTOR_MENU, Dropdown.dataApiKeydownHandler)
+ EventHandler.on(document, DROPDOWN_EVENT_CLICK_DATA_API, Dropdown.clearMenus)
+ EventHandler.on(document, DROPDOWN_EVENT_KEYUP_DATA_API, Dropdown.clearMenus)
+ EventHandler.on(document, DROPDOWN_EVENT_CLICK_DATA_API, DROPDOWN_SELECTOR_DATA_TOGGLE, function (event) {
    event.preventDefault()
    event.stopPropagation()
    Dropdown.dropdownInterface(this, 'toggle')
  })
  EventHandler
-   .on(document, EVENT_CLICK_DATA_API, SELECTOR_FORM_CHILD, e => e.stopPropagation())
+   .on(document, DROPDOWN_EVENT_CLICK_DATA_API, DROPDOWN_SELECTOR_FORM_CHILD, e => e.stopPropagation())
 
 /**
 * ------------------------------------------------------------------------

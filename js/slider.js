@@ -5,20 +5,11 @@
  * --------------------------------------------------------------------------
  */
 
- import {
-  TRANSITION_END,
-  emulateTransitionEnd,
-  getElementFromSelector,
-  getTransitionDurationFromElement,
-  isVisible,
-  reflow,
-  triggerTransitionEnd,
-  typeCheckConfig
-} from '@utils/index'
-import Data from '@dom/data'
-import EventHandler from '@dom/event-handler'
-import Manipulator from '@dom/manipulator'
-import SelectorEngine from '@dom/selector-engine'
+import { TRANSITION_END, emulateTransitionEnd, getElementFromSelector, getTransitionDurationFromElement, isVisible, reflow, triggerTransitionEnd } from './util/index'
+import Data from './dom/data'
+import EventHandler from './dom/event-handler'
+import Manipulator from './dom/manipulator'
+import SelectorEngine from './dom/selector-engine'
 
 /**
  * ------------------------------------------------------------------------
@@ -26,27 +17,18 @@ import SelectorEngine from '@dom/selector-engine'
  * ------------------------------------------------------------------------
  */
 
-const NAME = 'slider'
-const VERSION = '0.1.0-alpha1'
-const DATA_KEY = 'chichi.slider'
-const EVENT_KEY = `.${DATA_KEY}`
-const DATA_API_KEY = '.data-api'
+const SLIDER_NAME = 'slider'
+const SLIDER_VERSION = '0.1.0-alpha1'
+const SLIDER_DATA_KEY = 'chichi.slider'
+const SLIDER_EVENT_KEY = `.${SLIDER_DATA_KEY}`
+const SLIDER_DATA_API_KEY = '.data-api'
 
-const ARROW_LEFT_KEY = 'ArrowLeft'
-const ARROW_RIGHT_KEY = 'ArrowRight'
-const TOUCHEVENT_COMPAT_WAIT = 500 // Time for mouse compat events to fire after touch
-const SWIPE_THRESHOLD = 40
+const SLIDER_ARROW_LEFT_KEY = 'ArrowLeft'
+const SLIDER_ARROW_RIGHT_KEY = 'ArrowRight'
+const SLIDER_TOUCHEVENT_COMPAT_WAIT = 500 // Time for mouse compat events to fire after touch
+const SLIDER_SWIPE_THRESHOLD = 40
 
-interface SliderType = {
-  interval: number|boolean,
-  keyboard: boolean,
-  slide: boolean|string,
-  pause: string|boolean,
-  wrap: boolean,
-  touch: boolean
-}
-
-const Default: SliderType = {
+const SliderDefaults = {
   interval: 5000,
   keyboard: true,
   slide: false,
@@ -55,42 +37,42 @@ const Default: SliderType = {
   touch: true
 }
 
-const DIRECTION_NEXT = 'next'
-const DIRECTION_PREV = 'prev'
-const DIRECTION_LEFT = 'left'
-const DIRECTION_RIGHT = 'right'
+const SLIDER_DIRECTION_NEXT = 'next'
+const SLIDER_DIRECTION_PREV = 'prev'
+const SLIDER_DIRECTION_LEFT = 'left'
+const SLIDER_DIRECTION_RIGHT = 'right'
 
-const EVENT_SLIDE = `slide${EVENT_KEY}`
-const EVENT_SLID = `slid${EVENT_KEY}`
-const EVENT_KEYDOWN = `keydown${EVENT_KEY}`
-const EVENT_MOUSEENTER = `mouseenter${EVENT_KEY}`
-const EVENT_MOUSELEAVE = `mouseleave${EVENT_KEY}`
-const EVENT_TOUCHSTART = `touchstart${EVENT_KEY}`
-const EVENT_TOUCHMOVE = `touchmove${EVENT_KEY}`
-const EVENT_TOUCHEND = `touchend${EVENT_KEY}`
-const EVENT_POINTERDOWN = `pointerdown${EVENT_KEY}`
-const EVENT_POINTERUP = `pointerup${EVENT_KEY}`
-const EVENT_DRAG_START = `dragstart${EVENT_KEY}`
-const EVENT_LOAD_DATA_API = `load${EVENT_KEY}${DATA_API_KEY}`
-const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`
+const SLIDER_EVENT_SLIDE = `slide${SLIDER_EVENT_KEY}`
+const SLIDER_EVENT_SLID = `slid${SLIDER_EVENT_KEY}`
+const SLIDER_EVENT_KEYDOWN = `keydown${SLIDER_EVENT_KEY}`
+const SLIDER_EVENT_MOUSEENTER = `mouseenter${SLIDER_EVENT_KEY}`
+const SLIDER_EVENT_MOUSELEAVE = `mouseleave${SLIDER_EVENT_KEY}`
+const SLIDER_EVENT_TOUCHSTART = `touchstart${SLIDER_EVENT_KEY}`
+const SLIDER_EVENT_TOUCHMOVE = `touchmove${SLIDER_EVENT_KEY}`
+const SLIDER_EVENT_TOUCHEND = `touchend${SLIDER_EVENT_KEY}`
+const SLIDER_EVENT_POINTERDOWN = `pointerdown${SLIDER_EVENT_KEY}`
+const SLIDER_EVENT_POINTERUP = `pointerup${SLIDER_EVENT_KEY}`
+const SLIDER_EVENT_DRAG_START = `dragstart${SLIDER_EVENT_KEY}`
+const SLIDER_EVENT_LOAD_DATA_API = `load${SLIDER_EVENT_KEY}${SLIDER_DATA_API_KEY}`
+const SLIDER_EVENT_CLICK_DATA_API = `click${SLIDER_EVENT_KEY}${SLIDER_DATA_API_KEY}`
 
-const CLASS_NAME_CAROUSEL = 'carousel'
-const CLASS_NAME_ACTIVE = 'active'
-const CLASS_NAME_SLIDE = 'slide'
-const CLASS_NAME_RIGHT = 'carousel-item-right'
-const CLASS_NAME_LEFT = 'carousel-item-left'
-const CLASS_NAME_NEXT = 'carousel-item-next'
-const CLASS_NAME_PREV = 'carousel-item-prev'
-const CLASS_NAME_POINTER_EVENT = 'pointer-event'
+const SLIDER_CLASS_NAME_SLIDER = 'slider'
+const SLIDER_CLASS_NAME_ACTIVE = 'is-active'
+const SLIDER_CLASS_NAME_SLIDE = 'slide'
+const SLIDER_CLASS_NAME_RIGHT = 'carousel-item-right'
+const SLIDER_CLASS_NAME_LEFT = 'carousel-item-left'
+const SLIDER_CLASS_NAME_NEXT = 'carousel-item-next'
+const SLIDER_CLASS_NAME_PREV = 'carousel-item-prev'
+const SLIDER_CLASS_NAME_POINTER_EVENT = 'pointer-event'
 
-const SELECTOR_ACTIVE = '.active'
-const SELECTOR_ACTIVE_ITEM = '.active.carousel-item'
-const SELECTOR_ITEM = '.carousel-item'
-const SELECTOR_ITEM_IMG = '.carousel-item img'
-const SELECTOR_NEXT_PREV = '.carousel-item-next, .carousel-item-prev'
-const SELECTOR_INDICATORS = '.carousel-indicators'
-const SELECTOR_DATA_SLIDE = '[data-slide], [data-slide-to]'
-const SELECTOR_DATA_RIDE = '[data-ride="carousel"]'
+const SLIDER_SELECTOR_ACTIVE = '.is-active'
+const SLIDER_SELECTOR_ACTIVE_ITEM = '.is-active.slider-item'
+const SLIDER_SELECTOR_ITEM = '.slider-item'
+const SLIDER_SELECTOR_ITEM_IMG = '.slider-item img'
+const SLIDER_SELECTOR_NEXT_PREV = '.slider-item-next, .slider-item-prev'
+const SLIDER_SELECTOR_INDICATORS = '.slider-indicators'
+const SLIDER_SELECTOR_DATA_SLIDE = '[data-slide], [data-slide-to]'
+const SLIDER_SELECTOR_DATA_RIDE = '[data-ride="slider"]'
 
 const PointerType = {
   TOUCH: 'touch',
@@ -116,29 +98,29 @@ class Slider {
 
     this._config = this._getConfig(config)
     this._element = element
-    this._indicatorsElement = SelectorEngine.findOne(SELECTOR_INDICATORS, this._element)
+    this._indicatorsElement = SelectorEngine.findOne(SLIDER_SELECTOR_INDICATORS, this._element)
     this._touchSupported = 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0
     this._pointerEvent = Boolean(window.PointerEvent)
 
     this._addEventListeners()
-    Data.setData(element, DATA_KEY, this)
+    Data.setData(element, SLIDER_DATA_KEY, this)
   }
 
   // Getters
 
   static get VERSION() {
-    return VERSION
+    return SLIDER_VERSION
   }
 
   static get Default() {
-    return Default
+    return SliderDefaults
   }
 
   // Public
 
   next() {
     if (!this._isSliding) {
-      this._slide(DIRECTION_NEXT)
+      this._slide(SLIDER_DIRECTION_NEXT)
     }
   }
 
@@ -152,7 +134,7 @@ class Slider {
 
   prev() {
     if (!this._isSliding) {
-      this._slide(DIRECTION_PREV)
+      this._slide(SLIDER_DIRECTION_PREV)
     }
   }
 
@@ -161,7 +143,7 @@ class Slider {
       this._isPaused = true
     }
 
-    if (SelectorEngine.findOne(SELECTOR_NEXT_PREV, this._element)) {
+    if (SelectorEngine.findOne(SLIDER_SELECTOR_NEXT_PREV, this._element)) {
       triggerTransitionEnd(this._element)
       this.cycle(true)
     }
@@ -189,7 +171,7 @@ class Slider {
   }
 
   to(index) {
-    this._activeElement = SelectorEngine.findOne(SELECTOR_ACTIVE_ITEM, this._element)
+    this._activeElement = SelectorEngine.findOne(SLIDER_SELECTOR_ACTIVE_ITEM, this._element)
     const activeIndex = this._getItemIndex(this._activeElement)
 
     if (index > this._items.length - 1 || index < 0) {
@@ -197,7 +179,7 @@ class Slider {
     }
 
     if (this._isSliding) {
-      EventHandler.one(this._element, EVENT_SLID, () => this.to(index))
+      EventHandler.one(this._element, SLIDER_EVENT_SLID, () => this.to(index))
       return
     }
 
@@ -208,15 +190,15 @@ class Slider {
     }
 
     const direction = index > activeIndex ?
-      DIRECTION_NEXT :
-      DIRECTION_PREV
+      SLIDER_DIRECTION_NEXT :
+      SLIDER_DIRECTION_PREV
 
     this._slide(direction, this._items[index])
   }
 
   dispose() {
-    EventHandler.off(this._element, EVENT_KEY)
-    Data.removeData(this._element, DATA_KEY)
+    EventHandler.off(this._element, SLIDER_EVENT_KEY)
+    Data.removeData(this._element, SLIDER_DATA_KEY)
 
     this._items = null
     this._config = null
@@ -264,14 +246,14 @@ class Slider {
   _addEventListeners() {
     if (this._config.keyboard) {
       EventHandler
-        .on(this._element, EVENT_KEYDOWN, event => this._keydown(event))
+        .on(this._element, SLIDER_EVENT_KEYDOWN, event => this._keydown(event))
     }
 
     if (this._config.pause === 'hover') {
       EventHandler
-        .on(this._element, EVENT_MOUSEENTER, event => this.pause(event))
+        .on(this._element, SLIDER_EVENT_MOUSEENTER, event => this.pause(event))
       EventHandler
-        .on(this._element, EVENT_MOUSELEAVE, event => this.cycle(event))
+        .on(this._element, SLIDER_EVENT_MOUSELEAVE, event => this.cycle(event))
     }
 
     if (this._config.touch && this._touchSupported) {
@@ -321,19 +303,19 @@ class Slider {
       }
     }
 
-    SelectorEngine.find(SELECTOR_ITEM_IMG, this._element).forEach(itemImg => {
-      EventHandler.on(itemImg, EVENT_DRAG_START, e => e.preventDefault())
+    SelectorEngine.find(SLIDER_SELECTOR_ITEM_IMG, this._element).forEach(itemImg => {
+      EventHandler.on(itemImg, SLIDER_EVENT_DRAG_START, e => e.preventDefault())
     })
 
     if (this._pointerEvent) {
-      EventHandler.on(this._element, EVENT_POINTERDOWN, event => start(event))
-      EventHandler.on(this._element, EVENT_POINTERUP, event => end(event))
+      EventHandler.on(this._element, SLIDER_EVENT_POINTERDOWN, event => start(event))
+      EventHandler.on(this._element, SLIDER_EVENT_POINTERUP, event => end(event))
 
-      this._element.classList.add(CLASS_NAME_POINTER_EVENT)
+      this._element.classList.add(SLIDER_CLASS_NAME_POINTER_EVENT)
     } else {
-      EventHandler.on(this._element, EVENT_TOUCHSTART, event => start(event))
-      EventHandler.on(this._element, EVENT_TOUCHMOVE, event => move(event))
-      EventHandler.on(this._element, EVENT_TOUCHEND, event => end(event))
+      EventHandler.on(this._element, SLIDER_EVENT_TOUCHSTART, event => start(event))
+      EventHandler.on(this._element, SLIDER_EVENT_TOUCHMOVE, event => move(event))
+      EventHandler.on(this._element, SLIDER_EVENT_TOUCHEND, event => end(event))
     }
   }
 
@@ -357,15 +339,15 @@ class Slider {
 
   _getItemIndex(element) {
     this._items = element && element.parentNode ?
-      SelectorEngine.find(SELECTOR_ITEM, element.parentNode) :
+      SelectorEngine.find(SLIDER_SELECTOR_ITEM, element.parentNode) :
       []
 
     return this._items.indexOf(element)
   }
 
   _getItemByDirection(direction, activeElement) {
-    const isNextDirection = direction === DIRECTION_NEXT
-    const isPrevDirection = direction === DIRECTION_PREV
+    const isNextDirection = direction === SLIDER_DIRECTION_NEXT
+    const isPrevDirection = direction === SLIDER_DIRECTION_PREV
     const activeIndex = this._getItemIndex(activeElement)
     const lastItemIndex = this._items.length - 1
     const isGoingToWrap = (isPrevDirection && activeIndex === 0) ||
@@ -375,7 +357,7 @@ class Slider {
       return activeElement
     }
 
-    const delta = direction === DIRECTION_PREV ? -1 : 1
+    const delta = direction === SLIDER_DIRECTION_PREV ? -1 : 1
     const itemIndex = (activeIndex + delta) % this._items.length
 
     return itemIndex === -1 ?
@@ -385,9 +367,9 @@ class Slider {
 
   _triggerSlideEvent(relatedTarget, eventDirectionName) {
     const targetIndex = this._getItemIndex(relatedTarget)
-    const fromIndex = this._getItemIndex(SelectorEngine.findOne(SELECTOR_ACTIVE_ITEM, this._element))
+    const fromIndex = this._getItemIndex(SelectorEngine.findOne(SLIDER_SELECTOR_ACTIVE_ITEM, this._element))
 
-    return EventHandler.trigger(this._element, EVENT_SLIDE, {
+    return EventHandler.trigger(this._element, SLIDER_SLIDER_EVENT_SLIDE, {
       relatedTarget,
       direction: eventDirectionName,
       from: fromIndex,
@@ -397,9 +379,9 @@ class Slider {
 
   _setActiveIndicatorElement(element) {
     if (this._indicatorsElement) {
-      const indicators = SelectorEngine.find(SELECTOR_ACTIVE, this._indicatorsElement)
+      const indicators = SelectorEngine.find(SLIDER_SELECTOR_ACTIVE, this._indicatorsElement)
       for (let i = 0; i < indicators.length; i++) {
-        indicators[i].classList.remove(CLASS_NAME_ACTIVE)
+        indicators[i].classList.remove(SLIDER_CLASS_NAME_ACTIVE)
       }
 
       const nextIndicator = this._indicatorsElement.children[
@@ -407,13 +389,13 @@ class Slider {
       ]
 
       if (nextIndicator) {
-        nextIndicator.classList.add(CLASS_NAME_ACTIVE)
+        nextIndicator.classList.add(SLIDER_CLASS_NAME_ACTIVE)
       }
     }
   }
 
   _slide(direction, element) {
-    const activeElement = SelectorEngine.findOne(SELECTOR_ACTIVE_ITEM, this._element)
+    const activeElement = SelectorEngine.findOne(SLIDER_SELECTOR_ACTIVE_ITEM, this._element)
     const activeElementIndex = this._getItemIndex(activeElement)
     const nextElement = element || (activeElement &&
       this._getItemByDirection(direction, activeElement))
@@ -425,17 +407,17 @@ class Slider {
     let orderClassName
     let eventDirectionName
 
-    if (direction === DIRECTION_NEXT) {
-      directionalClassName = CLASS_NAME_LEFT
-      orderClassName = CLASS_NAME_NEXT
-      eventDirectionName = DIRECTION_LEFT
+    if (direction === SLIDER_DIRECTION_NEXT) {
+      directionalClassName = SLIDER_CLASS_NAME_LEFT
+      orderClassName = SLIDER_CLASS_NAME_NEXT
+      eventDirectionName = SLIDER_DIRECTION_LEFT
     } else {
-      directionalClassName = CLASS_NAME_RIGHT
-      orderClassName = CLASS_NAME_PREV
-      eventDirectionName = DIRECTION_RIGHT
+      directionalClassName = SLIDER_CLASS_NAME_RIGHT
+      orderClassName = SLIDER_CLASS_NAME_PREV
+      eventDirectionName = SLIDER_DIRECTION_RIGHT
     }
 
-    if (nextElement && nextElement.classList.contains(CLASS_NAME_ACTIVE)) {
+    if (nextElement && nextElement.classList.contains(SLIDER_CLASS_NAME_ACTIVE)) {
       this._isSliding = false
       return
     }
@@ -458,7 +440,7 @@ class Slider {
 
     this._setActiveIndicatorElement(nextElement)
 
-    if (this._element.classList.contains(CLASS_NAME_SLIDE)) {
+    if (this._element.classList.contains(SLIDER_CLASS_NAME_SLIDE)) {
       nextElement.classList.add(orderClassName)
 
       reflow(nextElement)
@@ -479,14 +461,14 @@ class Slider {
       EventHandler
         .one(activeElement, TRANSITION_END, () => {
           nextElement.classList.remove(directionalClassName, orderClassName)
-          nextElement.classList.add(CLASS_NAME_ACTIVE)
+          nextElement.classList.add(SLIDER_CLASS_NAME_ACTIVE)
 
-          activeElement.classList.remove(CLASS_NAME_ACTIVE, orderClassName, directionalClassName)
+          activeElement.classList.remove(SLIDER_CLASS_NAME_ACTIVE, orderClassName, directionalClassName)
 
           this._isSliding = false
 
           setTimeout(() => {
-            EventHandler.trigger(this._element, EVENT_SLID, {
+            EventHandler.trigger(this._element, SLIDER_EVENT_SLID, {
               relatedTarget: nextElement,
               direction: eventDirectionName,
               from: activeElementIndex,
@@ -497,11 +479,11 @@ class Slider {
 
       emulateTransitionEnd(activeElement, transitionDuration)
     } else {
-      activeElement.classList.remove(CLASS_NAME_ACTIVE)
-      nextElement.classList.add(CLASS_NAME_ACTIVE)
+      activeElement.classList.remove(SLIDER_CLASS_NAME_ACTIVE)
+      nextElement.classList.add(SLIDER_CLASS_NAME_ACTIVE)
 
       this._isSliding = false
-      EventHandler.trigger(this._element, EVENT_SLID, {
+      EventHandler.trigger(this._element, SLIDER_EVENT_SLID, {
         relatedTarget: nextElement,
         direction: eventDirectionName,
         from: activeElementIndex,
@@ -517,7 +499,7 @@ class Slider {
   // Static
 
   static sliderInterface(element, config) {
-    let data = Data.getData(element, DATA_KEY)
+    let data = Data.getData(element, SLIDER_DATA_KEY)
     let _config = {
       ...Default,
       ...Manipulator.getDataAttributes(element)
@@ -553,7 +535,7 @@ class Slider {
   static dataApiClickHandler(event) {
     const target = getElementFromSelector(this)
 
-    if (!target || !target.classList.contains(CLASS_NAME_CAROUSEL)) {
+    if (!target || !target.classList.contains(SLIDER_CLASS_NAME_SLIDER)) {
       return
     }
 
@@ -570,14 +552,14 @@ class Slider {
     Slider.sliderInterface(target, config)
 
     if (slideIndex) {
-      Data.getData(target, DATA_KEY).to(slideIndex)
+      Data.getData(target, SLIDER_DATA_KEY).to(slideIndex)
     }
 
     event.preventDefault()
   }
 
   static getInstance(element) {
-    return Data.getData(element, DATA_KEY)
+    return Data.getData(element, SLIDER_DATA_KEY)
   }
 }
 
@@ -588,13 +570,13 @@ class Slider {
  */
 
 EventHandler
-  .on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_SLIDE, Slider.dataApiClickHandler)
+  .on(document, SLIDER_EVENT_CLICK_DATA_API, SLIDER_SELECTOR_DATA_SLIDE, Slider.dataApiClickHandler)
 
-EventHandler.on(window, EVENT_LOAD_DATA_API, () => {
-  const sliders = SelectorEngine.find(SELECTOR_DATA_RIDE)
+EventHandler.on(window, SLIDER_EVENT_LOAD_DATA_API, () => {
+  const sliders = SelectorEngine.find(SLIDER_SELECTOR_DATA_RIDE)
 
   for (let i = 0, len = sliders.length; i < len; i++) {
-    Slider.sliderInterface(sliders[i], Data.getData(sliders[i], DATA_KEY))
+    Slider.sliderInterface(sliders[i], Data.getData(sliders[i], SLIDER_DATA_KEY))
   }
 })
 

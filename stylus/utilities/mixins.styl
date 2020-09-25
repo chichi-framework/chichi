@@ -10,7 +10,7 @@ typography_sizes($target = '')
     $i = index($sizes, $size) + 1
     $target_suffix = $target == '' ? '': '-' + $target
     .is-size-{$i}{$target_suffix}
-      font-size: $size !important
+      font-size: $size
 
 has_color_helpers($colors=$colors)
   for $name, $pair in $colors
@@ -60,7 +60,7 @@ has_color_dark_helpers($colors=$colors)
 
 alignments($target = '')
   for $alignment, $text_align in $alignments
-    $target_suffix = $target == '' ? '': '-' + $target
+    $target_suffix = $target ? '' : '-' + $target
     .has-text-{$alignment}{$target_suffix}
       text-align: $text_align
 
@@ -101,9 +101,7 @@ hamburger($dimensions)
     left: calc(50% - 8px)
     position: absolute
     transform-origin: center
-    transition-duration: $hamburger_speed
-    transition-property: background-color, opacity, transform
-    transition-timing-function: $hamburger_easing
+    transition: all $hamburger_speed $hamburger_easing
     width: 16px
     &:nth-child(1)
       top: calc(50% - 6px)
@@ -137,17 +135,17 @@ ltr_property($property, $spacing, $right = true)
   $normal = $right ? 'right' : 'left'
   $opposite = $right ? 'left' : 'right'
   if $enable_rtl
-    add-property('%s-%s' % ($property $opposite), $spacing)
+    add-property(unquote('%s-%s' % ($property $opposite)), $spacing)
   else
-    add-property('%s-%s' % ($property $normal), $spacing)
+    add-property(unquote('%s-%s' % ($property $normal)), $spacing)
 
 ltr_position($spacing, $right = true)
   $normal = $right ? 'right' : 'left'
   $opposite = $right ? 'left' : 'right'
   if $enable_rtl
-    add-property('%s' % $opposite, $spacing)
+    add-property(unquote('%s' % $opposite), $spacing)
   else
-    add-property('%s' % $normal, $spacing)
+    add-property(unquote('%s' % $normal), $spacing)
 
 keyframes($name)
   @keyframes $name
