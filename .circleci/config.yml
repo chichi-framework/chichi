@@ -3,7 +3,7 @@ version: 2.1
 executors:
   python:
     docker:
-      - image: cimg/python:latest-node
+      - image: cimg/python:3.9.0rc2-node
 
 orbs:
   # heroku: circleci/heroku@1.2.2
