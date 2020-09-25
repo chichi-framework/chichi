@@ -37,6 +37,6 @@ workflows:
     jobs:
       - install_python_deps:
         pre_steps:
-          - run: pip3 install pipenv
+          run: pip3 install pipenv
 
       - install_node_deps
