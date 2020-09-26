@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://chichi.io/">
-    <img src="https://chichi.io/assets/brand/chichi-logo.png" alt="ChiChi logo" width="200" height="165">
+    <img src="./assets/brand/chichi-logo.png" alt="ChiChi logo" width="200" height="165">
   </a>
   <br/>
   <a href="https://github.com/chichiframework/chichi">
