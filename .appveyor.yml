@@ -17,3 +17,4 @@ cache:
 
 build_script:
   - ps: .\nuget\MyGet.ps1
+  - ps: $nuget
