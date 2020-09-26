@@ -25,8 +25,9 @@ artifacts:
   - path: '**/*.nupkg'
 
 deploy:
-  - provider: NuGet
-    skip_symbols: true
-    api_key:
-      secure: oy2j6nkbtz56lhvn2ruay6ioumamgsyebf2wkawy5drrm4
-    artifact: /.*\.nupkg/
+  - provider: GitHub
+    artifact: /.*\.nupkg/           # upload all NuGet packages to release assets
+    draft: false
+    prerelease: true
+    on:
+      branch: master
