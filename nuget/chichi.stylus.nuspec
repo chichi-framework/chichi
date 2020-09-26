@@ -4,14 +4,14 @@
     <id>chichi</id>
     <version>0.1.0-alpha2</version>
     <title>ChiChi Stylus</title>
-    <authors>chichiframwork</authors>
-    <owners>chichiframwork</owners>
+    <authors>chichiframework</authors>
+    <owners>chichiframework</owners>
     <description>The most popular front-end framework for Stylus</description>
     <releaseNotes>https://github.com/chichiframework/chichi/releases</releaseNotes>
     <summary>ChiChi CSS, Includes JavaScript</summary>
     <language>en-us</language>
     <projectUrl>https://chichi.io</projectUrl>
-    <icon>chichi-logo.svg</icon>
+    <icon>chichi-logo.png</icon>
     <license type="file">LICENSE.txt</license>
     <copyright>Copyright 2020</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -22,7 +22,7 @@
   </metadata>
   <files>
     <file src="LICENSE.txt" target="" />
-    <file src="nuget/chichi-logo.svg" target="" />
+    <file src="nuget/chichi-logo.png" target="" />
 
     <file src="stylus\**\*.styl" target="content\Content\chichi" />
     <file src="dist\js\chichi*.js" target="content\Scripts" />
