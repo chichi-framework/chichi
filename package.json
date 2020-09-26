@@ -25,7 +25,7 @@
     "release:bump": "bump2version release",
     "release:clean": "gulp clean:zips",
     "release:zip": "gulp zip",
-    "watch": "gulp watch",
+    "watch": "gulp watch"
   },
   "main": "dist/js/chichi.js",
   "engines": {
