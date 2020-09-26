@@ -22,7 +22,7 @@ cache:
 install:
   - ps: .\nuget\MyGet.ps1
 
-build:
+build_script:
   publish_nuget: true
 
 artifacts:
