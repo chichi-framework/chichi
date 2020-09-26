@@ -15,5 +15,5 @@ matrix:
 cache:
   - '%LocalAppData%\NuGet\v3-cache'
 
-install:
+build_script:
   - ps: .\nuget\MyGet.ps1
