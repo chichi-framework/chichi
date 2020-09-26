@@ -9,10 +9,6 @@ platform: Any CPU
 init:
   - git config --global core.autocrlf input
 
-environment:
-  NUGET_DEPLOY_KEY:
-    secure: oy2j6nkbtz56lhvn2ruay6ioumamgsyebf2wkawy5drrm4
-
 matrix:
   fast_finish: true
 
@@ -31,5 +27,6 @@ artifacts:
 deploy:
   - provider: NuGet
     skip_symbols: true
-    api_key: $NUGET_DEPLOY_KEY
+    api_key:
+      secure: oy2j6nkbtz56lhvn2ruay6ioumamgsyebf2wkawy5drrm4
     artifact: /.*\.nupkg/
