@@ -26,7 +26,6 @@ artifacts:
 
 deploy:
   - provider: NuGet
-    api_key:
-      secure: sd2rl6thkh20l4n5kskpj5dd
+    api_key: sd2rl6thkh20l4n5kskpj5dd
     skip_symbols: true
     artifact: /.*\.nupkg/           # upload all NuGet packages to release assets
