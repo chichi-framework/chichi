@@ -2,6 +2,7 @@
   <a href="https://chichi.io/">
     <img src="https://chichi.io/assets/brand/chichi-logo.png" alt="ChiChi logo" width="200" height="165">
   </a>
+  <br/>
   <a href="https://github.com/chichiframework/chichi">
     <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/chichi-framework/chichi?style=social">
   </a>
