@@ -2,15 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>chichi</id>
-    <version>0.1.0-alpha2-rc-alpha1</version>
+    <version>0.1.0-alpha2</version>
     <title>ChiChi Stylus</title>
     <authors>ChiChi Framework</authors>
     <description>The most popular front-end framework for Stylus</description>
-    <releaseNotes>https://blog.chichi.io</releaseNotes>
+    <releaseNotes>https://github.com/chichiframework/chichi/releases</releaseNotes>
     <summary>ChiChi CSS, Includes JavaScript</summary>
     <language>en-us</language>
     <projectUrl>https://chichi.io</projectUrl>
-    <icon>chichi-logo.png</icon>
+    <icon>chichi-logo.svg</icon>
     <license type="file">LICENSE.txt</license>
     <copyright>Copyright 2020</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -21,7 +21,7 @@
   </metadata>
   <files>
     <file src="LICENSE.txt" target="" />
-    <file src="nuget/chichi-logo.png" target="" />
+    <file src="nuget/chichi-logo.svg" target="" />
 
     <file src="stylus\**\*.styl" target="content\Content\chichi" />
     <file src="dist\js\chichi*.js" target="content\Scripts" />
