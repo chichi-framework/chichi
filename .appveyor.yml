@@ -31,5 +31,5 @@ artifacts:
 deploy:
   - provider: NuGet
     skip_symbols: true
-    api_key: {NUGET_DEPLOY_KEY}
+    api_key: {$NUGET_DEPLOY_KEY}
     artifact: /.*\.nupkg/
