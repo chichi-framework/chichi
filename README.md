@@ -2,6 +2,12 @@
   <a href="https://chichi.io/">
     <img src="https://chichi.io/assets/brand/chichi-logo.png" alt="ChiChi logo" width="200" height="165">
   </a>
+  <a href="https://github.com/chichiframework/chichi">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/chichi-framework/chichi?style=social">
+  </a>
+  <a href="https://twitter.com/chichiframework">
+    <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/chichiframework?label=Followers&style=social">
+  </a>
 </p>
 
 <h3 align="center">ChiChi</h3>
@@ -48,9 +54,8 @@ Read the [Getting started page](https://chichi.io/docs/0.1.0/getting-started/int
 [![CircleCI](https://img.shields.io/circleci/build/github/chichi-framework/chichi/master?label=CirleCi&logo=circleci&style=for-the-badge&token=59482c8a0c1e07a1a9ecd4c2454c3f0a161c68c7)](https://app.circleci.com/pipelines/github/chichi-framework/chichi)
 [![AppVeyor](https://img.shields.io/appveyor/build/thecodechef/chichi?label=APPVEYOR&logo=APPVEYOR&logoColor=white&style=for-the-badge)](https://ci.appveyor.com/project/thecodechef/chichi)
 [![npm version](https://img.shields.io/npm/v/chichi.svg)](https://www.npmjs.com/package/chichi)
-[![Meteor Atmosphere](https://img.shields.io/badge/meteor-chichi-blue.svg)](https://atmospherejs.com/chichi-framework/chichi)
-[![Packagist Prerelease](https://img.shields.io/packagist/vpre/chichi/chichi.svg)](https://packagist.org/packages/chichi/chichi)
-[![NuGet](https://img.shields.io/nuget/vpre/chichi.svg)](https://www.nuget.org/packages/chichi/absoluteLatest)
+[![Packagist Prerelease](https://img.shields.io/packagist/v/chichi-framework/chichi.svg)](https://packagist.org/packages/chichi/chichi)
+[![NuGet](https://img.shields.io/nuget/v/chichi.svg)](https://www.nuget.org/packages/chichi/absoluteLatest)
 [![CSS Gzip Size](https://img.shields.io/github/size/chichi-framework/chichi/dist/css/chichi.min.css?label=gzip&logo=css&logoColor=white&style=for-the-badge)](https://github.com/chichi-framework/chichi/tree/master/dist/css/chichi.min.css)
 [![JS Gzip Size](https://img.shields.io/github/size/chichi-framework/chichi/dist/js/chichi.min.js?label=gzip&logo=javascript&logoColor=white&style=for-the-badge)](https://github.com/chichi-framework/chichi/tree/master/dist/js/chichi.min.js)
 
