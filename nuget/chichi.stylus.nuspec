@@ -23,11 +23,9 @@
   <files>
     <file src="LICENSE.txt" target="" />
     <file src="nuget/chichi-logo.png" target="" />
-
     <file src="stylus\**\*.styl" target="content\Content\chichi" />
     <file src="dist\js\chichi*.js" target="content\Scripts" />
     <file src="dist\js\chichi*.js.map" target="content\Scripts" />
-
     <file src="stylus\**\*.styl" target="contentFiles\any\any\webroot/stylus" />
     <file src="dist\js\chichi*.js" target="contentFiles\any\any\webroot/js" />
     <file src="dist\js\chichi*.js.map" target="contentFiles\any\any\webroot/js" />
